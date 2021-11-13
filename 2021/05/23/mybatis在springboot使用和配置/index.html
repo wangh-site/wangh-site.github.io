@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | Hexo</title>
+  <title>mybatis在springboot使用和配置 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring Data JPA，之前都是使用MyBatis，怎么使用具体记录一下吧 1、在SpringBoot项目的pom.xml文件中引入依赖12345678910&lt;dependency&gt;    &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;mysq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis在springboot使用和配置">
+<meta property="og:url" content="http://example.com/2021/05/23/mybatis%E5%9C%A8springboot%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring Data JPA，之前都是使用MyBatis，怎么使用具体记录一下吧 1、在SpringBoot项目的pom.xml文件中引入依赖12345678910&lt;dependency&gt;    &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;mysq">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-23T11:47:05.000Z">
+<meta property="article:modified_time" content="2021-11-08T13:01:08.000Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="mybatis">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -150,215 +155,76 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-mybatis在springboot使用和配置" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/13/hello-world/" class="archive-article-date">
-  	<time datetime="2021-11-13T02:39:39.173Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-13</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/13/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      mybatis在springboot使用和配置
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/28/Stream/" class="archive-article-date">
-  	<time datetime="2021-10-28T15:01:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/28/Stream/">Stream</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Stream java8</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/09/16/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B7%BB%E5%8A%A0ip%E7%99%BD%E5%90%8D%E5%8D%95/" class="archive-article-date">
-  	<time datetime="2021-09-16T13:42:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/09/16/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B7%BB%E5%8A%A0ip%E7%99%BD%E5%90%8D%E5%8D%95/">数据库添加ip白名单</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">mysql、postgresql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/09/16/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85/" class="archive-article-date">
-  	<time datetime="2021-09-16T12:50:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/09/16/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85/">数据库安装</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">mysql、postgresql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/23/SpringDataJPA%E5%9C%A8SpringBoot%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2021-05-23T13:03:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/23/SpringDataJPA%E5%9C%A8SpringBoot%E4%BD%BF%E7%94%A8/">SpringDataJPA在SpringBoot使用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringData</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/23/mybatis%E5%9C%A8springboot%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+        
+        <a href="/2021/05/23/mybatis%E5%9C%A8springboot%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/" class="archive-article-date">
   	<time datetime="2021-05-23T11:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-23</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/23/mybatis%E5%9C%A8springboot%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/">mybatis在springboot使用和配置</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring-Data-JPA，之前都是使用MyBatis，怎么使用具体记录一下吧"><a href="#在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring-Data-JPA，之前都是使用MyBatis，怎么使用具体记录一下吧" class="headerlink" title="在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring Data JPA，之前都是使用MyBatis，怎么使用具体记录一下吧"></a>在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring Data JPA，之前都是使用MyBatis，怎么使用具体记录一下吧</h4><hr>
+<h4 id="1、在SpringBoot项目的pom-xml文件中引入依赖"><a href="#1、在SpringBoot项目的pom-xml文件中引入依赖" class="headerlink" title="1、在SpringBoot项目的pom.xml文件中引入依赖"></a>1、在SpringBoot项目的pom.xml文件中引入依赖</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">    &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">2.0</span><span class="number">.0</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
+
+
+<h4 id="2、在配置文件中配置mysql的连接配置"><a href="#2、在配置文件中配置mysql的连接配置" class="headerlink" title="2、在配置文件中配置mysql的连接配置"></a>2、在配置文件中配置mysql的连接配置</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mysql--&gt;</span></span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    url: jdbc:mysql://localhost:3306/wangh?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=true</span><br><span class="line">    username: root</span><br><span class="line">    password: root</span><br><span class="line">    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- postgresql--&gt;</span></span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    url: jdbc:postgresql://192.168.31.106:5432/postgres</span><br><span class="line">    driver-class-name: org.postgresql.Driver</span><br><span class="line">    username: postgres</span><br><span class="line">    password: 123</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3、建立需要的实体类和表，然后在Dao层中添加操作接口来定义数据操作"><a href="#3、建立需要的实体类和表，然后在Dao层中添加操作接口来定义数据操作" class="headerlink" title="3、建立需要的实体类和表，然后在Dao层中添加操作接口来定义数据操作"></a>3、建立需要的实体类和表，然后在Dao层中添加操作接口来定义数据操作</h4><p>随便写一个查询的语句，在每个接口的前面加上**@Mapper**注解，让项目能够扫描到</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface UserMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Select(&quot;SELECT * FROM user WHERE name = #&#123;name&#125;&quot;)</span><br><span class="line">    User findByName(@Param(&quot;name&quot;) String name);</span><br><span class="line"></span><br><span class="line">    @Insert(&quot;INSERT INTO user(name, age) VALUES(#&#123;name&#125;, #&#123;age&#125;)&quot;)</span><br><span class="line">    int insert(@Param(&quot;name&quot;) String name, @Param(&quot;age&quot;) Integer age);</span><br><span class="line"></span><br><span class="line">    @Update(&quot;UPDATE user SET age=#&#123;age&#125; WHERE name=#&#123;name&#125;&quot;)</span><br><span class="line">    void update(User user);</span><br><span class="line"></span><br><span class="line">    @Delete(&quot;DELETE FROM user WHERE id =#&#123;id&#125;&quot;)</span><br><span class="line">    void delete(Long id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果要使用包装类（实体类和表不一样），这个时候最好使用@Results和@Result注解来绑定</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">    @Result(property = &quot;name&quot;, column = &quot;name&quot;),</span></span><br><span class="line"><span class="meta">    @Result(property = &quot;age&quot;, column = &quot;age&quot;)</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br><span class="line"><span class="meta">@Select(&quot;SELECT name, age FROM user&quot;)</span></span><br><span class="line"><span class="function">List&lt;User&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>其实除了使用@Mapper来让扫描还可以使用@MapperSan来指定路径，但是有的时候扫描不到，我还是习惯在每个接口前加上@Mapper注解，看着比较舒服</p>
+<h4 id="3、xml配置文件实现"><a href="#3、xml配置文件实现" class="headerlink" title="3、xml配置文件实现"></a>3、xml配置文件实现</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">    <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">    <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;org.apache.ibatis.submitted.rounding.Mapper&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">&quot;org.apache.ibatis.submitted.rounding.User&quot;</span> <span class="attr">id</span>=<span class="string">&quot;usermap&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;name&quot;</span> <span class="attr">property</span>=<span class="string">&quot;name&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;funkyNumber&quot;</span> <span class="attr">property</span>=<span class="string">&quot;funkyNumber&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;roundingMode&quot;</span> <span class="attr">property</span>=<span class="string">&quot;roundingMode&quot;</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getUser&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;usermap&quot;</span>&gt;</span></span><br><span class="line">		select * from users</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insert&quot;</span>&gt;</span></span><br><span class="line">	    insert into users (id, name, funkyNumber, roundingMode) values (</span><br><span class="line">	    	#&#123;id&#125;, #&#123;name&#125;, #&#123;funkyNumber&#125;, #&#123;roundingMode&#125;</span><br><span class="line">	    )</span><br><span class="line">	<span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">&quot;org.apache.ibatis.submitted.rounding.User&quot;</span> <span class="attr">id</span>=<span class="string">&quot;usermap2&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;name&quot;</span> <span class="attr">property</span>=<span class="string">&quot;name&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;funkyNumber&quot;</span> <span class="attr">property</span>=<span class="string">&quot;funkyNumber&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;roundingMode&quot;</span> <span class="attr">property</span>=<span class="string">&quot;roundingMode&quot;</span> <span class="attr">typeHandler</span>=<span class="string">&quot;org.apache.ibatis.type.EnumTypeHandler&quot;</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getUser2&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;usermap2&quot;</span>&gt;</span></span><br><span class="line">		select * from users2</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insert2&quot;</span>&gt;</span></span><br><span class="line">	    insert into users2 (id, name, funkyNumber, roundingMode) values (</span><br><span class="line">	    	#&#123;id&#125;, #&#123;name&#125;, #&#123;funkyNumber&#125;, #&#123;roundingMode, typeHandler=org.apache.ibatis.type.EnumTypeHandler&#125;</span><br><span class="line">	    )</span><br><span class="line">	<span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>完成。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -370,171 +236,115 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/05/23/mybatis%E5%9C%A8springboot%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/23/DataGrip%E8%BF%9E%E6%8E%A5MySQL%E6%8A%A5%E6%97%B6%E5%8C%BA%E9%94%99%E8%AF%AF/" class="archive-article-date">
-  	<time datetime="2021-05-23T05:05:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-23</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2021/05/23/SpringDataJPA%E5%9C%A8SpringBoot%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          SpringDataJPA在SpringBoot使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/05/23/DataGrip%E8%BF%9E%E6%8E%A5MySQL%E6%8A%A5%E6%97%B6%E5%8C%BA%E9%94%99%E8%AF%AF/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">DataGrip连接MySQL报时区错误</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/23/DataGrip%E8%BF%9E%E6%8E%A5MySQL%E6%8A%A5%E6%97%B6%E5%8C%BA%E9%94%99%E8%AF%AF/">DataGrip连接MySQL报时区错误</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/22/springboot%E9%85%8D%E7%BD%AEswagger2/" class="archive-article-date">
-  	<time datetime="2021-05-22T15:09:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/22/springboot%E9%85%8D%E7%BD%AEswagger2/">springboot配置swagger2</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/22/springboot%E8%B8%A9%E5%9D%91-resful%E6%8E%A5%E5%8F%97%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E4%B8%BAnull/" class="archive-article-date">
-  	<time datetime="2021-05-22T12:36:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/22/springboot%E8%B8%A9%E5%9D%91-resful%E6%8E%A5%E5%8F%97%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E4%B8%BAnull/">springboot踩坑-resful接受对象属性为null</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/20/%E5%87%A0%E6%95%B0%E4%B9%8B%E5%92%8C/" class="archive-article-date">
-  	<time datetime="2021-05-20T13:39:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/20/%E5%87%A0%E6%95%B0%E4%B9%8B%E5%92%8C/">几数之和题目总结</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -557,8 +367,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

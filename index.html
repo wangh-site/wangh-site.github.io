@@ -227,6 +227,893 @@
 
 
   
+    <article id="post-Stream" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/28/Stream/">Stream</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/28/Stream/" class="archive-article-date">
+  	<time datetime="2021-10-28T15:01:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Java8 Stream 使用的是函数式编程模式，如同它的名字一样，它可以被用来对集合进行链状流式的操作。</strong></p>
+<h5 id="一、可以对流进行中间操作或者终端操作"><a href="#一、可以对流进行中间操作或者终端操作" class="headerlink" title="一、可以对流进行中间操作或者终端操作"></a><strong>一、可以对流进行中间操作或者终端操作</strong></h5><p>​    <strong>①：中间操作会再次返回一个流，所以，我们可以链接多个中间操作</strong></p>
+<p>​    <strong>②：终端操作是对流操作的一个结束动作，一般返回 <code>void</code> 或者一个非流的结果</strong></p>
+<p><strong>中间操作：</strong></p>
+<p>​    <strong>filter()</strong></p>
+<p>​    <strong>map()</strong></p>
+<p>​    <strong>flatMap()</strong></p>
+<p>​    <strong>distinct()</strong></p>
+<p>​    <strong>sorted()</strong></p>
+<p>​    <strong>peek()</strong></p>
+<p>​    <strong>limit()</strong></p>
+<p>​    <strong>skip()</strong></p>
+<p><strong>终端操作：</strong></p>
+<p>​    <strong>forEach()</strong></p>
+<p>​    <strong>forEachOrdered()</strong></p>
+<p>​    <strong>toArray()</strong></p>
+<p>​    <strong>reduce()</strong></p>
+<p>​    <strong>collect()</strong></p>
+<p>​    <strong>min()</strong></p>
+<p>​    <strong>max()</strong></p>
+<p>​    <strong>count()</strong></p>
+<p>​    <strong>anyMatch()</strong></p>
+<p>​    <strong>allMatch()</strong></p>
+<p>​    <strong>noneMatch()</strong></p>
+<p>​    <strong>findFirst()</strong></p>
+<p>​    <strong>finAny()</strong></p>
+<h5 id="二、创建Stream流的几种方式"><a href="#二、创建Stream流的几种方式" class="headerlink" title="二、创建Stream流的几种方式"></a>二、创建Stream流的几种方式</h5><p>1、Collection 集合的stream()方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.asList(<span class="string">&quot;a1&quot;</span>, <span class="string">&quot;a2&quot;</span>, <span class="string">&quot;a3&quot;</span>).stream() <span class="comment">// 创建流</span></span><br></pre></td></tr></table></figure>
+
+<p>2、通过 <code>Stream.of()</code> 从一堆对象中创建 Stream 流</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stream.of(<span class="string">&quot;a1&quot;</span>, <span class="string">&quot;a2&quot;</span>, <span class="string">&quot;a3&quot;</span>)</span><br><span class="line">    .findFirst()</span><br><span class="line">    .ifPresent(System.out::println);  <span class="comment">// a1</span></span><br></pre></td></tr></table></figure>
+
+<p>3、使用Stream.generate()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String&gt; stream3 = Stream.generate(() -&gt; <span class="string">&quot;love&quot;</span>).limit(<span class="number">10</span>);</span><br><span class="line">String[] strArr3 = stream3.toArray(String[]::<span class="keyword">new</span>);</span><br><span class="line">System.out.println(Arrays.toString(strArr3));</span><br></pre></td></tr></table></figure>
+
+<p>4、使用 Stream.iterate()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;BigInteger&gt; bigIntStream = Stream.iterate(BigInteger.ZERO, n -&gt; n.add(BigInteger.ONE)).limit(<span class="number">10</span>);</span><br><span class="line">BigInteger[] bigIntArr = bigIntStream.toArray(BigInteger[]::<span class="keyword">new</span>);</span><br><span class="line">System.out.println(Arrays.toString(bigIntArr));</span><br></pre></td></tr></table></figure>
+
+<p>5、使用流行的APIs，如Pattern.compile().splitAsStream()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String sentence = <span class="string">&quot;ma zhi chu is a Java wechat official account.&quot;</span>;</span><br><span class="line">Stream&lt;String&gt; wordStream = Pattern.compile(<span class="string">&quot;\\W&quot;</span>).splitAsStream(sentence);</span><br><span class="line">String[] wordArr = wordStream.toArray(String[]::<span class="keyword">new</span>);</span><br><span class="line">System.out.println(Arrays.toString(wordArr));</span><br></pre></td></tr></table></figure>
+
+<p>6、使用 BufferedReader.lines() 方法，将每行内容转成流</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BufferedReader reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(<span class="string">&quot;F:\\test_stream.txt&quot;</span>));</span><br><span class="line">Stream&lt;String&gt; lineStream = reader.lines();</span><br><span class="line">lineStream.forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+
+<h5 id="三、stream的中间操作"><a href="#三、stream的中间操作" class="headerlink" title="三、stream的中间操作"></a>三、stream的中间操作</h5><h6 id="1、筛选和切片"><a href="#1、筛选和切片" class="headerlink" title="1、筛选和切片"></a>1、筛选和切片</h6><p>​    <strong>fileter：过滤流中的元素</strong></p>
+<p>​    <strong>limit 获取前n个元素</strong></p>
+<p>​    <strong>skip 跳过n个元素</strong></p>
+<p>​    <strong>distinct：通过流中元素的hashCode和equals去除重复元素</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;Integer&gt; stream = Stream.of(<span class="number">6</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">14</span>, <span class="number">14</span>);</span><br><span class="line">  </span><br><span class="line">Stream&lt;Integer&gt; newStream = stream.filter(s -&gt; s &gt; <span class="number">5</span>) <span class="comment">//6 6 7 9 8 10 12 14 14</span></span><br><span class="line">.distinct() <span class="comment">//6 7 9 8 10 12 14</span></span><br><span class="line">.skip(<span class="number">2</span>) <span class="comment">//9 8 10 12 14</span></span><br><span class="line">.limit(<span class="number">2</span>); <span class="comment">//9 8</span></span><br><span class="line">newStream.forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="2、映射"><a href="#2、映射" class="headerlink" title="2、映射"></a>2、映射</h6><p>​    <strong>map：接收一个函数作为参数，该函数会被应用在每个元素上，将其映射为一个新的元素</strong></p>
+<p>​    <strong>flatMap：接收一个函数作为参数，将流中的每个值都换成另一个流，然后将所有的流连接起来</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = Arrays.asList(<span class="string">&quot;a,b,c&quot;</span>, <span class="string">&quot;1,2,3&quot;</span>);</span><br><span class="line">  </span><br><span class="line"><span class="comment">//将每个元素转成一个新的且不带逗号的元素</span></span><br><span class="line">Stream&lt;String&gt; s1 = list.stream().map(s -&gt; s.replaceAll(<span class="string">&quot;,&quot;</span>, <span class="string">&quot;&quot;</span>));</span><br><span class="line">s1.forEach(System.out::println); <span class="comment">// abc 123</span></span><br><span class="line">  </span><br><span class="line">Stream&lt;String&gt; s3 = list.stream().flatMap(s -&gt; &#123;</span><br><span class="line"><span class="comment">//将每个元素转换成一个stream</span></span><br><span class="line">String[] split = s.split(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">Stream&lt;String&gt; s2 = Arrays.stream(split);</span><br><span class="line"><span class="keyword">return</span> s2;</span><br><span class="line">&#125;);</span><br><span class="line">s3.forEach(System.out::println); <span class="comment">// a b c 1 2 3</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="3、排序"><a href="#3、排序" class="headerlink" title="3、排序"></a>3、排序</h6><p>​    <strong>sorted：自然排序，流中元素实现Comparable接口</strong></p>
+<p>​    <strong>sorted(Comparator com)：定制排序，自定义Comparator排序器</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = Arrays.asList(<span class="string">&quot;aa&quot;</span>, <span class="string">&quot;ff&quot;</span>, <span class="string">&quot;dd&quot;</span>);</span><br><span class="line"><span class="comment">//String 类自身已实现Compareable接口</span></span><br><span class="line">list.stream().sorted().forEach(System.out::println);<span class="comment">// aa dd ff</span></span><br><span class="line">  </span><br><span class="line">Student s1 = <span class="keyword">new</span> Student(<span class="string">&quot;aa&quot;</span>, <span class="number">10</span>);</span><br><span class="line">Student s2 = <span class="keyword">new</span> Student(<span class="string">&quot;bb&quot;</span>, <span class="number">20</span>);</span><br><span class="line">Student s3 = <span class="keyword">new</span> Student(<span class="string">&quot;aa&quot;</span>, <span class="number">30</span>);</span><br><span class="line">Student s4 = <span class="keyword">new</span> Student(<span class="string">&quot;dd&quot;</span>, <span class="number">40</span>);</span><br><span class="line">List&lt;Student&gt; studentList = Arrays.asList(s1, s2, s3, s4);</span><br><span class="line">  </span><br><span class="line"><span class="comment">//自定义排序：先按姓名升序，姓名相同则按年龄升序</span></span><br><span class="line">studentList.stream().sorted(</span><br><span class="line">(o1, o2) -&gt; &#123;</span><br><span class="line"><span class="keyword">if</span> (o1.getName().equals(o2.getName())) &#123;</span><br><span class="line"><span class="keyword">return</span> o1.getAge() - o2.getAge();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="keyword">return</span> o1.getName().compareTo(o2.getName());</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">).forEach(System.out::println);　</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="4、消费"><a href="#4、消费" class="headerlink" title="4、消费"></a>4、消费</h6><p>​    <strong>peek：如同于map，得到流中的每一个元素，map接收到的是一个Function表达式，有返回值，而peek接收的是Consumer表达式，没有返回值</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Student s1 = <span class="keyword">new</span> Student(<span class="string">&quot;aa&quot;</span>, <span class="number">10</span>);</span><br><span class="line">Student s2 = <span class="keyword">new</span> Student(<span class="string">&quot;bb&quot;</span>, <span class="number">20</span>);</span><br><span class="line">List&lt;Student&gt; studentList = Arrays.asList(s1, s2);</span><br><span class="line">  </span><br><span class="line">studentList.stream()</span><br><span class="line">.peek(o -&gt; o.setAge(<span class="number">100</span>))</span><br><span class="line">.forEach(System.out::println);</span><br><span class="line">  </span><br><span class="line"><span class="comment">//结果：</span></span><br><span class="line">Student&#123;name=<span class="string">&#x27;aa&#x27;</span>, age=<span class="number">100</span>&#125;</span><br><span class="line">Student&#123;name=<span class="string">&#x27;bb&#x27;</span>, age=<span class="number">100</span>&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="四、Stream的终止操作"><a href="#四、Stream的终止操作" class="headerlink" title="四、Stream的终止操作"></a>四、Stream的终止操作</h5><h6 id="1、匹配、聚合操作"><a href="#1、匹配、聚合操作" class="headerlink" title="1、匹配、聚合操作"></a>1、匹配、聚合操作</h6><p>​        <strong>allMatch：接收一个 Predicate 函数，当流中每个元素都符合该断言时才返回true，否则返回false</strong><br>　　<strong>noneMatch：接收一个 Predicate 函数，当流中每个元素都不符合该断言时才返回true，否则返回false</strong><br>　　<strong>anyMatch：接收一个 Predicate 函数，只要流中有一个元素满足该断言则返回true，否则返回false</strong><br>　　<strong>findFirst：返回流中第一个元素</strong><br>　　<strong>findAny：返回流中的任意元素</strong><br>　　<strong>count：返回流中元素的总个数</strong><br>　　<strong>max：返回流中元素最大值</strong><br>　　<strong>min：返回流中元素最小值</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>);</span><br><span class="line">  </span><br><span class="line"><span class="keyword">boolean</span> allMatch = list.stream().allMatch(e -&gt; e &gt; <span class="number">10</span>); <span class="comment">//false</span></span><br><span class="line"><span class="keyword">boolean</span> noneMatch = list.stream().noneMatch(e -&gt; e &gt; <span class="number">10</span>); <span class="comment">//true</span></span><br><span class="line"><span class="keyword">boolean</span> anyMatch = list.stream().anyMatch(e -&gt; e &gt; <span class="number">4</span>); <span class="comment">//true</span></span><br><span class="line">  </span><br><span class="line">Integer findFirst = list.stream().findFirst().get(); <span class="comment">//1</span></span><br><span class="line">Integer findAny = list.stream().findAny().get(); <span class="comment">//1</span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">long</span> count = list.stream().count(); <span class="comment">//5</span></span><br><span class="line">Integer max = list.stream().max(Integer::compareTo).get(); <span class="comment">//5</span></span><br><span class="line">Integer min = list.stream().min(Integer::compareTo).get(); <span class="comment">//1　　</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="2、规约操作"><a href="#2、规约操作" class="headerlink" title="2、规约操作"></a>2、规约操作</h6><p>​        <strong>Optional reduce(BinaryOperator accumulator)：第一次执行时，accumulator函数的第一个参数为流中的第一个元素，第二个参数为流中元素的第二个元素；第二次执行时，第一个参数为第一次函数执行的结果，第二个参数为流中的第三个元素；依次类推。</strong><br>　　<strong>T reduce(T identity, BinaryOperator accumulator)：流程跟上面一样，只是第一次执行时，accumulator函数的第一个参数为identity，而第二个参数为流中的第一个元素。</strong><br>　　<strong>U reduce(U identity,BiFunction&lt;U, ? super T, U&gt; accumulator,BinaryOperator combiner)：在串行流(stream)中，该方法跟第二个方法一样，即第三个参数combiner不会起作用。在并行流(parallelStream)中,我们知道流被fork join出多个线程进行执行，此时每个线程的执行流程就跟第二个方法reduce(identity,accumulator)一样，而第三个参数combiner函数，则是将每个线程的执行结果当成一个新的流，然后使用第一个方法reduce(accumulator)流程进行规约。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//经过测试，当元素个数小于24时，并行时线程数等于元素个数，当大于等于24时，并行时线程数为16</span></span><br><span class="line">List&lt;Integer&gt; list = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>, <span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>, <span class="number">24</span>);</span><br><span class="line">  </span><br><span class="line">Integer v = list.stream().reduce((x1, x2) -&gt; x1 + x2).get();</span><br><span class="line">System.out.println(v); <span class="comment">// 300</span></span><br><span class="line">  </span><br><span class="line">Integer v1 = list.stream().reduce(<span class="number">10</span>, (x1, x2) -&gt; x1 + x2);</span><br><span class="line">System.out.println(v1); <span class="comment">//310</span></span><br><span class="line">  </span><br><span class="line">Integer v2 = list.stream().reduce(<span class="number">0</span>,</span><br><span class="line">(x1, x2) -&gt; &#123;</span><br><span class="line">System.out.println(<span class="string">&quot;stream accumulator: x1:&quot;</span> + x1 + <span class="string">&quot; x2:&quot;</span> + x2);</span><br><span class="line"><span class="keyword">return</span> x1 - x2;</span><br><span class="line">&#125;,</span><br><span class="line">(x1, x2) -&gt; &#123;</span><br><span class="line">System.out.println(<span class="string">&quot;stream combiner: x1:&quot;</span> + x1 + <span class="string">&quot; x2:&quot;</span> + x2);</span><br><span class="line"><span class="keyword">return</span> x1 * x2;</span><br><span class="line">&#125;);</span><br><span class="line">System.out.println(v2); <span class="comment">// -300</span></span><br><span class="line">  </span><br><span class="line">Integer v3 = list.parallelStream().reduce(<span class="number">0</span>,</span><br><span class="line">(x1, x2) -&gt; &#123;</span><br><span class="line">System.out.println(<span class="string">&quot;parallelStream accumulator: x1:&quot;</span> + x1 + <span class="string">&quot; x2:&quot;</span> + x2);</span><br><span class="line"><span class="keyword">return</span> x1 - x2;</span><br><span class="line">&#125;,</span><br><span class="line">(x1, x2) -&gt; &#123;</span><br><span class="line">System.out.println(<span class="string">&quot;parallelStream combiner: x1:&quot;</span> + x1 + <span class="string">&quot; x2:&quot;</span> + x2);</span><br><span class="line"><span class="keyword">return</span> x1 * x2;</span><br><span class="line">&#125;);</span><br><span class="line">System.out.println(v3); <span class="comment">//197474048</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="3、收集操作"><a href="#3、收集操作" class="headerlink" title="3、收集操作"></a>3、收集操作</h6><p>​        <strong>collect</strong>：接收一个Collector实例，将流中元素收集成另外一个数据结构。<br>　　<strong>Collector&lt;T, A, R&gt;</strong> 是一个接口，有以下5个抽象方法：<br>　　**Supplier<A> supplier()**：创建一个结果容器A<br>　　**BiConsumer&lt;A, T&gt; accumulator()**：消费型接口，第一个参数为容器A，第二个参数为流中元素T。<br>　　**BinaryOperator<A> combiner()**：函数接口，该参数的作用跟上一个方法(reduce)中的combiner参数一样，将并行流中各 个子进程的运行结果(accumulator函数操作后的容器A)进行合并。<br>　　**Function&lt;A, R&gt; finisher()**：函数式接口，参数为：容器A，返回类型为：collect方法最终想要的结果R。<br>　　**Set<Characteristics> characteristics()**：返回一个不可变的Set集合，用来表明该Collector的特征。有以下三个特征：<br>　　<strong>CONCURRENT</strong>：表示此收集器支持并发。（官方文档还有其他描述，暂时没去探索，故不作过多翻译）<br>　　<strong>UNORDERED</strong>：表示该收集操作不会保留流中元素原有的顺序。<br>　　<strong>IDENTITY_FINISH</strong>：表示finisher参数只是标识而已，可忽略。</p>
+<p><strong>Collector 工具库：Collectors</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">Student s1 = <span class="keyword">new</span> Student(<span class="string">&quot;aa&quot;</span>, <span class="number">10</span>,<span class="number">1</span>);</span><br><span class="line">Student s2 = <span class="keyword">new</span> Student(<span class="string">&quot;bb&quot;</span>, <span class="number">20</span>,<span class="number">2</span>);</span><br><span class="line">Student s3 = <span class="keyword">new</span> Student(<span class="string">&quot;cc&quot;</span>, <span class="number">10</span>,<span class="number">3</span>);</span><br><span class="line">List&lt;Student&gt; list = Arrays.asList(s1, s2, s3);</span><br><span class="line">  </span><br><span class="line"><span class="comment">//装成list</span></span><br><span class="line">List&lt;Integer&gt; ageList = list.stream().map(Student::getAge).collect(Collectors.toList()); <span class="comment">// [10, 20, 10]</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">//转成set</span></span><br><span class="line">Set&lt;Integer&gt; ageSet = list.stream().map(Student::getAge).collect(Collectors.toSet()); <span class="comment">// [20, 10]</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">//转成map,注:key不能相同，否则报错</span></span><br><span class="line">Map&lt;String, Integer&gt; studentMap = list.stream().collect(Collectors.toMap(Student::getName, Student::getAge)); <span class="comment">// &#123;cc=10, bb=20, aa=10&#125;</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">//字符串分隔符连接</span></span><br><span class="line">String joinName = list.stream().map(Student::getName).collect(Collectors.joining(<span class="string">&quot;,&quot;</span>, <span class="string">&quot;(&quot;</span>, <span class="string">&quot;)&quot;</span>)); <span class="comment">// (aa,bb,cc)</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">//聚合操作</span></span><br><span class="line"><span class="comment">//1.学生总数</span></span><br><span class="line">Long count = list.stream().collect(Collectors.counting()); <span class="comment">// 3</span></span><br><span class="line"><span class="comment">//2.最大年龄 (最小的minBy同理)</span></span><br><span class="line">Integer maxAge = list.stream().map(Student::getAge).collect(Collectors.maxBy(Integer::compare)).get(); <span class="comment">// 20</span></span><br><span class="line"><span class="comment">//3.所有人的年龄</span></span><br><span class="line">Integer sumAge = list.stream().collect(Collectors.summingInt(Student::getAge)); <span class="comment">// 40</span></span><br><span class="line"><span class="comment">//4.平均年龄</span></span><br><span class="line">Double averageAge = list.stream().collect(Collectors.averagingDouble(Student::getAge)); <span class="comment">// 13.333333333333334</span></span><br><span class="line"><span class="comment">// 带上以上所有方法</span></span><br><span class="line">DoubleSummaryStatistics statistics = list.stream().collect(Collectors.summarizingDouble(Student::getAge));</span><br><span class="line">System.out.println(<span class="string">&quot;count:&quot;</span> + statistics.getCount() + <span class="string">&quot;,max:&quot;</span> + statistics.getMax() + <span class="string">&quot;,sum:&quot;</span> + statistics.getSum() + <span class="string">&quot;,average:&quot;</span> + statistics.getAverage());</span><br><span class="line">  </span><br><span class="line"><span class="comment">//分组</span></span><br><span class="line">Map&lt;Integer, List&lt;Student&gt;&gt; ageMap = list.stream().collect(Collectors.groupingBy(Student::getAge));</span><br><span class="line"><span class="comment">//多重分组,先根据类型分再根据年龄分</span></span><br><span class="line">Map&lt;Integer, Map&lt;Integer, List&lt;Student&gt;&gt;&gt; typeAgeMap = list.stream().collect(Collectors.groupingBy(Student::getType, Collectors.groupingBy(Student::getAge)));</span><br><span class="line">  </span><br><span class="line"><span class="comment">//分区</span></span><br><span class="line"><span class="comment">//分成两部分，一部分大于10岁，一部分小于等于10岁</span></span><br><span class="line">Map&lt;Boolean, List&lt;Student&gt;&gt; partMap = list.stream().collect(Collectors.partitioningBy(v -&gt; v.getAge() &gt; <span class="number">10</span>));</span><br><span class="line">  </span><br><span class="line"><span class="comment">//规约</span></span><br><span class="line">Integer allAge = list.stream().map(Student::getAge).collect(Collectors.reducing(Integer::sum)).get(); <span class="comment">//40　　</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Collectors.toList() 解析</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//toList 源码</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; Collector&lt;T, ?, List&lt;T&gt;&gt; toList() &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">new</span> CollectorImpl&lt;&gt;((Supplier&lt;List&lt;T&gt;&gt;) ArrayList::<span class="keyword">new</span>, List::add,</span><br><span class="line">(left, right) -&gt; &#123;</span><br><span class="line">left.addAll(right);</span><br><span class="line"><span class="keyword">return</span> left;</span><br><span class="line">&#125;, CH_ID);</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="comment">//为了更好地理解，我们转化一下源码中的lambda表达式</span></span><br><span class="line"><span class="keyword">public</span> &lt;T&gt; Collector&lt;T, ?, List&lt;T&gt;&gt; toList() &#123;</span><br><span class="line">Supplier&lt;List&lt;T&gt;&gt; supplier = () -&gt; <span class="keyword">new</span> ArrayList();</span><br><span class="line">BiConsumer&lt;List&lt;T&gt;, T&gt; accumulator = (list, t) -&gt; list.add(t);</span><br><span class="line">BinaryOperator&lt;List&lt;T&gt;&gt; combiner = (list1, list2) -&gt; &#123;</span><br><span class="line">list1.addAll(list2);</span><br><span class="line"><span class="keyword">return</span> list1;</span><br><span class="line">&#125;;</span><br><span class="line">Function&lt;List&lt;T&gt;, List&lt;T&gt;&gt; finisher = (list) -&gt; list;</span><br><span class="line">Set&lt;Collector.Characteristics&gt; characteristics = Collections.unmodifiableSet(EnumSet.of(Collector.Characteristics.IDENTITY_FINISH));</span><br><span class="line">  </span><br><span class="line"><span class="keyword">return</span> <span class="keyword">new</span> Collector&lt;T, List&lt;T&gt;, List&lt;T&gt;&gt;() &#123;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Supplier <span class="title">supplier</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> supplier;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> BiConsumer <span class="title">accumulator</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> accumulator;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> BinaryOperator <span class="title">combiner</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> combiner;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Function <span class="title">finisher</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> finisher;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Set&lt;Characteristics&gt; <span class="title">characteristics</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="keyword">return</span> characteristics;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Stream java8</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/28/Stream/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据库添加ip白名单" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/16/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B7%BB%E5%8A%A0ip%E7%99%BD%E5%90%8D%E5%8D%95/">数据库添加ip白名单</a>
+    </h1>
+  
+
+        
+        <a href="/2021/09/16/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B7%BB%E5%8A%A0ip%E7%99%BD%E5%90%8D%E5%8D%95/" class="archive-article-date">
+  	<time datetime="2021-09-16T13:42:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="MySQL添加ip白名单"><a href="#MySQL添加ip白名单" class="headerlink" title="MySQL添加ip白名单"></a>MySQL添加ip白名单</h2><p>bin文件夹运行命令：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p root</span><br></pre></td></tr></table></figure>
+
+<p>进入mysql后，输入命令</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on *.* to &#x27;用户名&#x27;@&#x27;IP地址&#x27; identified by &#x27;密码&#x27;;</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 刷新权限 --&gt;</span></span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+<p>重启mysql服务即可</p>
+<h2 id="PostgreSQL添加ip白名单"><a href="#PostgreSQL添加ip白名单" class="headerlink" title="PostgreSQL添加ip白名单"></a>PostgreSQL添加ip白名单</h2><p>打开data文件下的pg_hba.conf文件</p>
+<p>在IPv4 local connections:添加ip</p>
+<p>重启postgresql服务即可</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">mysql、postgresql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/16/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B7%BB%E5%8A%A0ip%E7%99%BD%E5%90%8D%E5%8D%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据库安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/16/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85/">数据库安装</a>
+    </h1>
+  
+
+        
+        <a href="/2021/09/16/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85/" class="archive-article-date">
+  	<time datetime="2021-09-16T12:50:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="MySQL-5-7安装"><a href="#MySQL-5-7安装" class="headerlink" title="MySQL 5.7安装"></a>MySQL 5.7安装</h2><h4 id="1、下载MySQL5-7压缩包"><a href="#1、下载MySQL5-7压缩包" class="headerlink" title="1、下载MySQL5.7压缩包"></a>1、下载MySQL5.7压缩包</h4><p>下载地址：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://dev.mysql.com/get/Downloads/MySQL-5.0/mysql-5.7.35-winx64.zip</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、解压后，压缩目录新建data文件夹和my-ini文件"><a href="#2、解压后，压缩目录新建data文件夹和my-ini文件" class="headerlink" title="2、解压后，压缩目录新建data文件夹和my.ini文件"></a>2、解压后，压缩目录新建data文件夹和my.ini文件</h4><p>my.ini：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"># 设置3306端口</span><br><span class="line">port=3306</span><br><span class="line"># 设置mysql的安装目录</span><br><span class="line">basedir=D:\\Environment\\sql\\mysql\\mysql-5.7.35-winx64</span><br><span class="line"># 设置mysql数据库的数据的存放目录</span><br><span class="line">datadir=D:\\Environment\\sql\mysql\\mysql-5.7.35-winx64\\data</span><br><span class="line"># 允许最大连接数</span><br><span class="line">max_connections=200</span><br><span class="line"># 允许连接失败的次数。这是为了防止有人从该主机试图攻击数据库系统</span><br><span class="line">max_connect_errors=10</span><br><span class="line"># 服务端使用的字符集默认为UTF8</span><br><span class="line">character-set-server=utf8</span><br><span class="line"># 创建新表时将使用的默认存储引擎</span><br><span class="line">default-storage-engine=INNODB</span><br><span class="line"># 默认使用“mysql_native_password”插件认证</span><br><span class="line">default_authentication_plugin=mysql_native_password</span><br><span class="line">[mysql]</span><br><span class="line"># 设置mysql客户端默认字符集</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[client]</span><br><span class="line"># 设置mysql客户端连接服务端时默认使用的端口</span><br><span class="line">port=3306</span><br><span class="line">default-character-set=utf8</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、在bin文件夹下执行命令初始化数据"><a href="#3、在bin文件夹下执行命令初始化数据" class="headerlink" title="3、在bin文件夹下执行命令初始化数据"></a>3、在bin文件夹下执行命令初始化数据</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld --initialize --console</span><br></pre></td></tr></table></figure>
+
+<p>结果中已经包含密码</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Note] A temporary password is generated for root@localhost: 7--tyYzpU&gt;rh</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、在bin文件夹下执行命令安装服务"><a href="#4、在bin文件夹下执行命令安装服务" class="headerlink" title="4、在bin文件夹下执行命令安装服务"></a>4、在bin文件夹下执行命令安装服务</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld --install [服务名]</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、在bin文件夹下执行命令来修改密码"><a href="#5、在bin文件夹下执行命令来修改密码" class="headerlink" title="5、在bin文件夹下执行命令来修改密码"></a>5、在bin文件夹下执行命令来修改密码</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br><span class="line"><span class="comment">&lt;!-- 用第3步的密码登录 --&gt;</span></span><br><span class="line"></span><br><span class="line">ALTER USER USER() IDENTIFIED BY &#x27;新更改的密码&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="PostgreSQL安装"><a href="#PostgreSQL安装" class="headerlink" title="PostgreSQL安装"></a>PostgreSQL安装</h2><p>下载安装包，一直next即可，安装包地址为</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.enterprisedb.com/downloads/postgres-postgresql-downloads</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">mysql、postgresql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/16/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-SpringDataJPA在SpringBoot使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/23/SpringDataJPA%E5%9C%A8SpringBoot%E4%BD%BF%E7%94%A8/">SpringDataJPA在SpringBoot使用</a>
+    </h1>
+  
+
+        
+        <a href="/2021/05/23/SpringDataJPA%E5%9C%A8SpringBoot%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2021-05-23T13:03:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="SpringData？"><a href="#SpringData？" class="headerlink" title="SpringData？"></a>SpringData？</h3><p>SpringData就是Spring提供的一个操作数据的框架，而SpringData JPA是SpringData框架下得一个基于JPA标准操作数据的模块</p>
+<h3 id="SpringData-JPA？"><a href="#SpringData-JPA？" class="headerlink" title="SpringData JPA？"></a>SpringData JPA？</h3><p>基于JPA的标准数据进行操作，简化操作持久层的代码，只需要编写接口就可以</p>
+<hr>
+<p>JPA是SpringData的子项目，JPA简称是Java Persistence API的简称，中文名为Java持久层API，是JDK 5.0注解或XML描述对象－关系表的映射关系，并将运行期的实体对象持久化到数据库中。</p>
+<p>跟mybatis作用差不多</p>
+<h3 id="配置SpringData-JPA"><a href="#配置SpringData-JPA" class="headerlink" title="配置SpringData JPA"></a>配置SpringData JPA</h3><h4 id="1、导入依赖"><a href="#1、导入依赖" class="headerlink" title="1、导入依赖"></a>1、导入依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="2、配置文件"><a href="#2、配置文件" class="headerlink" title="2、配置文件"></a>2、配置文件</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    url: jdbc:mysql://localhost:3306/project_tickets</span><br><span class="line">    username: root</span><br><span class="line">    password: root</span><br><span class="line">    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">  jpa:</span><br><span class="line">    hibernate:</span><br><span class="line">      ddl-auto: update</span><br><span class="line">    show-sql: true</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<p><code>jpa:hibernate:ddl-auto: update</code>是hibernate的配置属性，其主要作用是：自动创建、更新、验证数据库表结构。该参数的几种配置如下：<br>1.·<strong>create</strong>：每次加载hibernate时都会删除上一次的生成的表，然后根据你的model类再重新来生成新表，哪怕两次没有任何改变也要这样执行，这就是导致数据库表数据丢失的一个重要原因。<br>2.·<strong>create-drop</strong>：每次加载hibernate时根据model类生成表，但是sessionFactory一关闭,表就自动删除。<br>3.·<strong>update</strong>：最常用的属性，第一次加载hibernate时根据model类会自动建立起表的结构（前提是先建立好数据库），以后加载hibernate时根据model类自动更新表结构，即使表结构改变了但表中的行仍然存在不会删除以前的行。要注意的是当部署到服务器后，表结构是不会被马上建立起来的，是要等应用第一次运行起来后才会。<br>4.·<strong>validate</strong>：每次加载hibernate时，验证创建数据库表结构，只会和数据库中的表进行比较，不会创建新表，但是会插入新值。</p>
+<p>一般创建表的时候用create，然后改为update</p>
+<hr>
+<h4 id="3、创建实体类"><a href="#3、创建实体类" class="headerlink" title="3、创建实体类"></a>3、创建实体类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Table(name = &quot;person&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column(name = &quot;name&quot;, length = 100)</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column(name = &quot;age&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>启动后在数据库会自动生成对应的表</p>
+<h4 id="4、Dao接口"><a href="#4、Dao接口" class="headerlink" title="4、Dao接口"></a>4、Dao接口</h4><p>如果只是简单的对单表进行CRUD，只需要继承JpaRepository接口,传递了两个参数:1.实体类,2.实体类中主键类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PersonDao</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">Person</span>, <span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="如果要自己写sql，可以在Dao接口下添加方法，通过-Query注解在value属性写sql来操作数据库"><a href="#如果要自己写sql，可以在Dao接口下添加方法，通过-Query注解在value属性写sql来操作数据库" class="headerlink" title="如果要自己写sql，可以在Dao接口下添加方法，通过@Query注解在value属性写sql来操作数据库"></a>如果要自己写sql，可以在Dao接口下添加方法，通过@Query注解在value属性写sql来操作数据库</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 查询根据参数位置</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> name</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="meta">@Query(value = &quot;select * from person  where name = ?1&quot;,nativeQuery = true)</span></span><br><span class="line"> <span class="function">Person <span class="title">findPersonByName</span><span class="params">(String Name)</span></span>;</span><br><span class="line"> </span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 查询根据Param注解</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> name</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="meta">@Query(value = &quot;select p from person p where p.uname = :name&quot;)</span></span><br><span class="line"> <span class="function">Person <span class="title">findPersonByNameTwo</span><span class="params">(<span class="meta">@Param(&quot;name&quot;)</span> String name)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>@Query有nativeQuery=true，表示可执行的原生sql，原生sql指可以直接复制sql语句给参数赋值就能运行</p>
+<p>@Query无nativeQuery=true， 表示不是原生sql，查询语句中的表名则是对应的项目中实体类的类名</p>
+<p><strong>在删改方法，在方法上要添加<code>@Transactional/@Modifying</code>注解</strong></p>
+<h4 id="直接添加查询方法：方法名一定是findBy-属性名"><a href="#直接添加查询方法：方法名一定是findBy-属性名" class="headerlink" title="直接添加查询方法：方法名一定是findBy+属性名"></a>直接添加查询方法：方法名一定是findBy+属性名</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Person <span class="title">findByName</span><span class="params">(String name)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>这种方法是不需要写sql的</p>
+<p><strong>关键字：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">And----findByLastnameAndFirstname----where x.lastname = ?<span class="number">1</span> and</span><br><span class="line">Or----findByLastnameOrFirstname----where x.lastname = ?<span class="number">1</span> or x.firstname = ?<span class="number">2</span></span><br><span class="line">Is,Equals----findByFirstnameIs,findByFirstnameEquals----where x.firstname = ?<span class="number">1</span></span><br><span class="line">Between----findByStartDateBetween----where x.startDate between ?<span class="number">1</span> and ?<span class="number">2</span></span><br><span class="line">LessThan----findByAgeLessThan----where x.age &lt; ?<span class="number">1</span></span><br><span class="line">LessThanEqual----findByAgeLessThanEqual----where x.age ⇐ ?<span class="number">1</span></span><br><span class="line">GreaterThan----findByAgeGreaterThan----where x.age &gt; ?<span class="number">1</span></span><br><span class="line">GreaterThanEqual----findByAgeGreaterThanEqual----where x.age &gt;= ?<span class="number">1</span></span><br><span class="line">After----findByStartDateAfter----where x.startDate &gt; ?<span class="number">1</span></span><br><span class="line">Before----findByStartDateBefore----where x.startDate &lt; ?<span class="number">1</span></span><br><span class="line">IsNull----findByAgeIsNull----where x.age is <span class="keyword">null</span></span><br><span class="line">IsNotNull,NotNull----findByAge(Is)NotNull----where x.age not <span class="keyword">null</span></span><br><span class="line">Like----findByFirstnameLike----where x.firstname like ?<span class="number">1</span></span><br><span class="line">NotLike----findByFirstnameNotLike----where x.firstname not like ?<span class="number">1</span></span><br><span class="line">StartingWith----findByFirstnameStartingWith----where x.firstname like ?<span class="number">1</span> (parameter bound with appended %)</span><br><span class="line">EndingWith----findByFirstnameEndingWith----where x.firstname like ?<span class="number">1</span> (parameter bound with prepended %)</span><br><span class="line">Containing----findByFirstnameContaining----where x.firstname like ?<span class="number">1</span> (parameter bound wrapped in %)</span><br><span class="line">OrderBy----findByAgeOrderByLastnameDesc----where x.age = ?<span class="number">1</span> order by x.lastname desc</span><br><span class="line">Not----findByLastnameNot----where x.lastname &lt;&gt; ?<span class="number">1</span></span><br><span class="line">In----findByAgeIn(Collection ages)----where x.age in ?<span class="number">1</span></span><br><span class="line">NotIn----findByAgeNotIn(Collection age)----where x.age not in ?<span class="number">1</span></span><br><span class="line">TRUE----findByActiveTrue()----where x.active = <span class="keyword">true</span></span><br><span class="line">FALSE----findByActiveFalse()----where x.active = <span class="keyword">false</span></span><br><span class="line">IgnoreCase----findByFirstnameIgnoreCase----<span class="function">where <span class="title">UPPER</span><span class="params">(x.firstame)</span> </span>= UPPER(?<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="编写复杂自定义sql"><a href="#编写复杂自定义sql" class="headerlink" title="编写复杂自定义sql"></a>编写复杂自定义sql</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringData</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/23/SpringDataJPA%E5%9C%A8SpringBoot%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-mybatis在springboot使用和配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/23/mybatis%E5%9C%A8springboot%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/">mybatis在springboot使用和配置</a>
+    </h1>
+  
+
+        
+        <a href="/2021/05/23/mybatis%E5%9C%A8springboot%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+  	<time datetime="2021-05-23T11:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring-Data-JPA，之前都是使用MyBatis，怎么使用具体记录一下吧"><a href="#在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring-Data-JPA，之前都是使用MyBatis，怎么使用具体记录一下吧" class="headerlink" title="在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring Data JPA，之前都是使用MyBatis，怎么使用具体记录一下吧"></a>在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring Data JPA，之前都是使用MyBatis，怎么使用具体记录一下吧</h4><hr>
+<h4 id="1、在SpringBoot项目的pom-xml文件中引入依赖"><a href="#1、在SpringBoot项目的pom-xml文件中引入依赖" class="headerlink" title="1、在SpringBoot项目的pom.xml文件中引入依赖"></a>1、在SpringBoot项目的pom.xml文件中引入依赖</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">    &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">2.0</span><span class="number">.0</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2、在配置文件中配置mysql的连接配置"><a href="#2、在配置文件中配置mysql的连接配置" class="headerlink" title="2、在配置文件中配置mysql的连接配置"></a>2、在配置文件中配置mysql的连接配置</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mysql--&gt;</span></span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    url: jdbc:mysql://localhost:3306/wangh?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=true</span><br><span class="line">    username: root</span><br><span class="line">    password: root</span><br><span class="line">    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- postgresql--&gt;</span></span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    url: jdbc:postgresql://192.168.31.106:5432/postgres</span><br><span class="line">    driver-class-name: org.postgresql.Driver</span><br><span class="line">    username: postgres</span><br><span class="line">    password: 123</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3、建立需要的实体类和表，然后在Dao层中添加操作接口来定义数据操作"><a href="#3、建立需要的实体类和表，然后在Dao层中添加操作接口来定义数据操作" class="headerlink" title="3、建立需要的实体类和表，然后在Dao层中添加操作接口来定义数据操作"></a>3、建立需要的实体类和表，然后在Dao层中添加操作接口来定义数据操作</h4><p>随便写一个查询的语句，在每个接口的前面加上**@Mapper**注解，让项目能够扫描到</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface UserMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Select(&quot;SELECT * FROM user WHERE name = #&#123;name&#125;&quot;)</span><br><span class="line">    User findByName(@Param(&quot;name&quot;) String name);</span><br><span class="line"></span><br><span class="line">    @Insert(&quot;INSERT INTO user(name, age) VALUES(#&#123;name&#125;, #&#123;age&#125;)&quot;)</span><br><span class="line">    int insert(@Param(&quot;name&quot;) String name, @Param(&quot;age&quot;) Integer age);</span><br><span class="line"></span><br><span class="line">    @Update(&quot;UPDATE user SET age=#&#123;age&#125; WHERE name=#&#123;name&#125;&quot;)</span><br><span class="line">    void update(User user);</span><br><span class="line"></span><br><span class="line">    @Delete(&quot;DELETE FROM user WHERE id =#&#123;id&#125;&quot;)</span><br><span class="line">    void delete(Long id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果要使用包装类（实体类和表不一样），这个时候最好使用@Results和@Result注解来绑定</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">    @Result(property = &quot;name&quot;, column = &quot;name&quot;),</span></span><br><span class="line"><span class="meta">    @Result(property = &quot;age&quot;, column = &quot;age&quot;)</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br><span class="line"><span class="meta">@Select(&quot;SELECT name, age FROM user&quot;)</span></span><br><span class="line"><span class="function">List&lt;User&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>其实除了使用@Mapper来让扫描还可以使用@MapperSan来指定路径，但是有的时候扫描不到，我还是习惯在每个接口前加上@Mapper注解，看着比较舒服</p>
+<h4 id="3、xml配置文件实现"><a href="#3、xml配置文件实现" class="headerlink" title="3、xml配置文件实现"></a>3、xml配置文件实现</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">    <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">    <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;org.apache.ibatis.submitted.rounding.Mapper&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">&quot;org.apache.ibatis.submitted.rounding.User&quot;</span> <span class="attr">id</span>=<span class="string">&quot;usermap&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;name&quot;</span> <span class="attr">property</span>=<span class="string">&quot;name&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;funkyNumber&quot;</span> <span class="attr">property</span>=<span class="string">&quot;funkyNumber&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;roundingMode&quot;</span> <span class="attr">property</span>=<span class="string">&quot;roundingMode&quot;</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getUser&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;usermap&quot;</span>&gt;</span></span><br><span class="line">		select * from users</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insert&quot;</span>&gt;</span></span><br><span class="line">	    insert into users (id, name, funkyNumber, roundingMode) values (</span><br><span class="line">	    	#&#123;id&#125;, #&#123;name&#125;, #&#123;funkyNumber&#125;, #&#123;roundingMode&#125;</span><br><span class="line">	    )</span><br><span class="line">	<span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">&quot;org.apache.ibatis.submitted.rounding.User&quot;</span> <span class="attr">id</span>=<span class="string">&quot;usermap2&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;name&quot;</span> <span class="attr">property</span>=<span class="string">&quot;name&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;funkyNumber&quot;</span> <span class="attr">property</span>=<span class="string">&quot;funkyNumber&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;roundingMode&quot;</span> <span class="attr">property</span>=<span class="string">&quot;roundingMode&quot;</span> <span class="attr">typeHandler</span>=<span class="string">&quot;org.apache.ibatis.type.EnumTypeHandler&quot;</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getUser2&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;usermap2&quot;</span>&gt;</span></span><br><span class="line">		select * from users2</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insert2&quot;</span>&gt;</span></span><br><span class="line">	    insert into users2 (id, name, funkyNumber, roundingMode) values (</span><br><span class="line">	    	#&#123;id&#125;, #&#123;name&#125;, #&#123;funkyNumber&#125;, #&#123;roundingMode, typeHandler=org.apache.ibatis.type.EnumTypeHandler&#125;</span><br><span class="line">	    )</span><br><span class="line">	<span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>完成。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/23/mybatis%E5%9C%A8springboot%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-DataGrip连接MySQL报时区错误" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/23/DataGrip%E8%BF%9E%E6%8E%A5MySQL%E6%8A%A5%E6%97%B6%E5%8C%BA%E9%94%99%E8%AF%AF/">DataGrip连接MySQL报时区错误</a>
+    </h1>
+  
+
+        
+        <a href="/2021/05/23/DataGrip%E8%BF%9E%E6%8E%A5MySQL%E6%8A%A5%E6%97%B6%E5%8C%BA%E9%94%99%E8%AF%AF/" class="archive-article-date">
+  	<time datetime="2021-05-23T05:05:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="DataGrip连接Mysql出错-Server-returns-invalid-timezone-Go-to-‘Advanced’-tab-and-set-‘"><a href="#DataGrip连接Mysql出错-Server-returns-invalid-timezone-Go-to-‘Advanced’-tab-and-set-‘" class="headerlink" title="DataGrip连接Mysql出错:Server returns invalid timezone. Go to ‘Advanced’ tab and set ‘"></a>DataGrip连接Mysql出错:Server returns invalid timezone. Go to ‘Advanced’ tab and set ‘</h3><p>这个错误指的是时区错误，因为MySQL的默认时区为UTC时区：世界标准时间，而我们在东八区，</p>
+<p>时区不匹配就会报这个错误</p>
+<h3 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h3><p>1、进入mysql命令行输入两行命令来修改时区</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set global time_zone = &#x27;+8:00&#x27;;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set time_zone = &#x27;+8:00&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>输入完毕后，输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like&#x27;%time_zone&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>查看时区状态表，变为+8:00即为修改成功</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/gOIfII"><img src="https://z3.ax1x.com/2021/05/23/gOIfII.png" alt="gOIfII.png"></a></p>
+<p>完成</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/23/DataGrip%E8%BF%9E%E6%8E%A5MySQL%E6%8A%A5%E6%97%B6%E5%8C%BA%E9%94%99%E8%AF%AF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-springboot配置swagger2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/22/springboot%E9%85%8D%E7%BD%AEswagger2/">springboot配置swagger2</a>
+    </h1>
+  
+
+        
+        <a href="/2021/05/22/springboot%E9%85%8D%E7%BD%AEswagger2/" class="archive-article-date">
+  	<time datetime="2021-05-22T15:09:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="springboot配置swagger2"><a href="#springboot配置swagger2" class="headerlink" title="springboot配置swagger2"></a>springboot配置swagger2</h3><h4 id="1、pom-xml导入依赖"><a href="#1、pom-xml导入依赖" class="headerlink" title="1、pom.xml导入依赖"></a>1、pom.xml导入依赖</h4><p>尽量使用版本为2.6以上的，低版本会报错</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.springfox&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">2.6</span><span class="number">.1</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.springfox&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">2.6</span><span class="number">.1</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、创建swagger2配置类"><a href="#2、创建swagger2配置类" class="headerlink" title="2、创建swagger2配置类"></a>2、创建swagger2配置类</h4><p>在启动类同级创建配置类swagger2.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger2</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">swagger2</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Docket <span class="title">createRestApi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .pathMapping(<span class="string">&quot;/&quot;</span>)</span><br><span class="line">                .select()</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(<span class="string">&quot;com.wangh.grabtickets.controller&quot;</span>))</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build().apiInfo(<span class="keyword">new</span> ApiInfoBuilder()</span><br><span class="line">                        .title(<span class="string">&quot;SpringBoot整合Swagger&quot;</span>)</span><br><span class="line">                        .description(<span class="string">&quot;SpringBoot整合Swagger，详细信息......&quot;</span>)</span><br><span class="line">                        .version(<span class="string">&quot;9.0&quot;</span>)</span><br><span class="line">                        .license(<span class="string">&quot;The Apache License&quot;</span>)</span><br><span class="line">                        .licenseUrl(<span class="string">&quot;http://www.baidu.com&quot;</span>)</span><br><span class="line">                        .build());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过@Configuration注解让spring加载，再通过@EnableSwagger2启动</p>
+<h3 id="3、添加文档内容"><a href="#3、添加文档内容" class="headerlink" title="3、添加文档内容"></a>3、添加文档内容</h3><p>通过添加<code>@ApiOperation</code>注解来给API增加说明、通过<code>@ApiImplicitParams</code>、<code>@ApiImplicitParam</code>注解来给参数增加说明。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiOperation(value=&quot;创建用户&quot;, notes=&quot;根据User对象创建用户&quot;)</span></span><br><span class="line"><span class="meta">@ApiImplicitParam(name = &quot;user&quot;, value = &quot;用户详细实体user&quot;, required = true, dataType = &quot;User&quot;)</span></span><br><span class="line"><span class="meta">@RequestMapping(value=&quot;&quot;, method=RequestMethod.POST)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">postUser</span><span class="params">(<span class="meta">@RequestBody</span> User user)</span> </span>&#123;</span><br><span class="line">    users.put(user.getId(), user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完成。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/22/springboot%E9%85%8D%E7%BD%AEswagger2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-springboot踩坑-resful接受对象属性为null" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/22/springboot%E8%B8%A9%E5%9D%91-resful%E6%8E%A5%E5%8F%97%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E4%B8%BAnull/">springboot踩坑-resful接受对象属性为null</a>
+    </h1>
+  
+
+        
+        <a href="/2021/05/22/springboot%E8%B8%A9%E5%9D%91-resful%E6%8E%A5%E5%8F%97%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E4%B8%BAnull/" class="archive-article-date">
+  	<time datetime="2021-05-22T12:36:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="RequestBody-接收到的对象属性为null"><a href="#RequestBody-接收到的对象属性为null" class="headerlink" title="@RequestBody 接收到的对象属性为null"></a>@RequestBody 接收到的对象属性为null</h3><p>今天写springboot项目的时候，前端postman测试传入一个对象到接口，发现后端拿到的接口一直为null</p>
+<h4 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderInfo</span> </span>&#123;</span><br><span class="line">    <span class="comment">//车号</span></span><br><span class="line">    <span class="keyword">private</span> String TrainId;</span><br><span class="line">    <span class="comment">//身份证</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> IdCard;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="解释一下-Data这个注解"><a href="#解释一下-Data这个注解" class="headerlink" title="解释一下@Data这个注解"></a>解释一下@Data这个注解</h4><p>这个注解的作用主要是可以提高代码的简洁，使用这个注解可以省去大量的get和set、toString方法</p>
+<p>要使用这个注解，要先引用lombok（一个工具类库，用简单的注解形式来简化代码，提高开发效率）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="回到问题：为什么接受到的对象属性为null"><a href="#回到问题：为什么接受到的对象属性为null" class="headerlink" title="回到问题：为什么接受到的对象属性为null"></a>回到问题：为什么接受到的对象属性为null</h4><p>这个原因是因为spring mvc默认使用jackson对json进行解析，</p>
+<p>在实体类的字段名在转换为json的时候，字段的属性名改变了。</p>
+<h4 id="原因：springboot解析器在解析json的时候，因字段名驼峰命名无法匹配字段导致"><a href="#原因：springboot解析器在解析json的时候，因字段名驼峰命名无法匹配字段导致" class="headerlink" title="原因：springboot解析器在解析json的时候，因字段名驼峰命名无法匹配字段导致"></a>原因：springboot解析器在解析json的时候，因字段名驼峰命名无法匹配字段导致</h4><h4 id="解决方法：在实体类字段的set方法加上如下注解："><a href="#解决方法：在实体类字段的set方法加上如下注解：" class="headerlink" title="解决方法：在实体类字段的set方法加上如下注解："></a>解决方法：在实体类字段的set方法加上如下注解：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonProperty(value = &quot;trainid&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getTrainId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> TrainId;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@JsonProperty(value = &quot;trainid&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTrainId</span><span class="params">(String trainId)</span> </span>&#123;</span><br><span class="line">    TrainId = trainId;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@JsonProperty(value = &quot;idcard&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getIdCard</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> IdCard;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@JsonProperty(value = &quot;idcard&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIdCard</span><span class="params">(<span class="keyword">long</span> idCard)</span> </span>&#123;</span><br><span class="line">    IdCard = idCard;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>问题成功解决。</p>
+<p>这个问题的主要原因在于：springboot驼峰命名在生成字段的时候，会将单词中间的大写字母变为小写，并且中间加上下划线。</p>
+<p>实体类属性最好不要有大写字母，避免发生问题</p>
+<p>正确命名方法：id_card或者train_id</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/22/springboot%E8%B8%A9%E5%9D%91-resful%E6%8E%A5%E5%8F%97%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E4%B8%BAnull/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-几数之和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/20/%E5%87%A0%E6%95%B0%E4%B9%8B%E5%92%8C/">几数之和题目总结</a>
+    </h1>
+  
+
+        
+        <a href="/2021/05/20/%E5%87%A0%E6%95%B0%E4%B9%8B%E5%92%8C/" class="archive-article-date">
+  	<time datetime="2021-05-20T13:39:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="经典的几数之和–-lt-合理利用双指针和哈希表-gt"><a href="#经典的几数之和–-lt-合理利用双指针和哈希表-gt" class="headerlink" title="经典的几数之和–&lt;合理利用双指针和哈希表&gt;"></a>经典的几数之和–&lt;合理利用双指针和哈希表&gt;</h2><h3 id="1、二数之和"><a href="#1、二数之和" class="headerlink" title="1、二数之和"></a>1、二数之和</h3><p>给定一个整数数组 <code>nums</code> 和一个整数目标值 <code>target</code>，请你在该数组中找出 <strong>和为目标值</strong> 的那 <strong>两个</strong> 整数，并返回它们的数组下标。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; hashtable = <span class="keyword">new</span> HashMap&lt;Integer, Integer&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hashtable.containsKey(target - nums[i])) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;hashtable.get(target - nums[i]), i&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            hashtable.put(nums[i], i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2、三数之和"><a href="#2、三数之和" class="headerlink" title="2、三数之和"></a>2、三数之和</h3><p>给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; threeSum(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> len=nums.length;</span><br><span class="line">        <span class="keyword">int</span> x,y,z;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">for</span>(x=<span class="number">0</span>;x&lt;len;x++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[x]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(x&gt;<span class="number">0</span> &amp;&amp; nums[x-<span class="number">1</span>]==nums[x])&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> left=x+<span class="number">1</span>,right=len-<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[left]+nums[right] &gt; -<span class="number">1</span>*nums[x])&#123;</span><br><span class="line">                    right--;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(nums[left]+nums[right] &lt; -<span class="number">1</span>*nums[x])&#123;</span><br><span class="line">                    left++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    ArrayList&lt;Integer&gt; l=<span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">                    <span class="keyword">int</span> []a=&#123;nums[x],nums[left],nums[right]&#125;;</span><br><span class="line">                    Arrays.sort(a);</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> k:a)&#123;</span><br><span class="line">                        l.add(k);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span>(!list.contains(l))&#123;</span><br><span class="line">                        list.add(l);</span><br><span class="line">                    &#125;</span><br><span class="line">                    left++;</span><br><span class="line">                    right--;</span><br><span class="line">                    <span class="comment">// continue;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3、最接近的三数之和"><a href="#3、最接近的三数之和" class="headerlink" title="3、最接近的三数之和"></a>3、最接近的三数之和</h3><p>给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">threeSumClosest</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">int</span> n = nums.length;</span><br><span class="line">        <span class="keyword">int</span> best = <span class="number">10000000</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 枚举 a</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="comment">// 保证和上一次枚举的元素不相等</span></span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 使用双指针枚举 b 和 c</span></span><br><span class="line">            <span class="keyword">int</span> j = i + <span class="number">1</span>, k = n - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (j &lt; k) &#123;</span><br><span class="line">                <span class="keyword">int</span> sum = nums[i] + nums[j] + nums[k];</span><br><span class="line">                <span class="comment">// 如果和为 target 直接返回答案</span></span><br><span class="line">                <span class="keyword">if</span> (sum == target) &#123;</span><br><span class="line">                    <span class="keyword">return</span> target;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 根据差值的绝对值来更新答案</span></span><br><span class="line">                <span class="keyword">if</span> (Math.abs(sum - target) &lt; Math.abs(best - target)) &#123;</span><br><span class="line">                    best = sum;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (sum &gt; target) &#123;</span><br><span class="line">                    <span class="comment">// 如果和大于 target，移动 c 对应的指针</span></span><br><span class="line">                    <span class="keyword">int</span> k0 = k - <span class="number">1</span>;</span><br><span class="line">                    <span class="comment">// 移动到下一个不相等的元素</span></span><br><span class="line">                    <span class="keyword">while</span> (j &lt; k0 &amp;&amp; nums[k0] == nums[k]) &#123;</span><br><span class="line">                        --k0;</span><br><span class="line">                    &#125;</span><br><span class="line">                    k = k0;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 如果和小于 target，移动 b 对应的指针</span></span><br><span class="line">                    <span class="keyword">int</span> j0 = j + <span class="number">1</span>;</span><br><span class="line">                    <span class="comment">// 移动到下一个不相等的元素</span></span><br><span class="line">                    <span class="keyword">while</span> (j0 &lt; k &amp;&amp; nums[j0] == nums[j]) &#123;</span><br><span class="line">                        ++j0;</span><br><span class="line">                    &#125;</span><br><span class="line">                    j = j0;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> best;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4、四数之和"><a href="#4、四数之和" class="headerlink" title="4、四数之和"></a>4、四数之和</h3><p>给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; fourSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; quadruplets = <span class="keyword">new</span> ArrayList&lt;List&lt;Integer&gt;&gt;();</span><br><span class="line">        <span class="keyword">if</span> (nums == <span class="keyword">null</span> || nums.length &lt; <span class="number">4</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> quadruplets;</span><br><span class="line">        &#125;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">int</span> length = nums.length;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length - <span class="number">3</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] + nums[i + <span class="number">1</span>] + nums[i + <span class="number">2</span>] + nums[i + <span class="number">3</span>] &gt; target) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] + nums[length - <span class="number">3</span>] + nums[length - <span class="number">2</span>] + nums[length - <span class="number">1</span>] &lt; target) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; length - <span class="number">2</span>; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j &gt; i + <span class="number">1</span> &amp;&amp; nums[j] == nums[j - <span class="number">1</span>]) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] + nums[j] + nums[j + <span class="number">1</span>] + nums[j + <span class="number">2</span>] &gt; target) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] + nums[j] + nums[length - <span class="number">2</span>] + nums[length - <span class="number">1</span>] &lt; target) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">int</span> left = j + <span class="number">1</span>, right = length - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">                    <span class="keyword">int</span> sum = nums[i] + nums[j] + nums[left] + nums[right];</span><br><span class="line">                    <span class="keyword">if</span> (sum == target) &#123;</span><br><span class="line">                        quadruplets.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));</span><br><span class="line">                        <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[left] == nums[left + <span class="number">1</span>]) &#123;</span><br><span class="line">                            left++;</span><br><span class="line">                        &#125;</span><br><span class="line">                        left++;</span><br><span class="line">                        <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[right] == nums[right - <span class="number">1</span>]) &#123;</span><br><span class="line">                            right--;</span><br><span class="line">                        &#125;</span><br><span class="line">                        right--;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &lt; target) &#123;</span><br><span class="line">                        left++;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        right--;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> quadruplets;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/20/%E5%87%A0%E6%95%B0%E4%B9%8B%E5%92%8C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
 
 
@@ -318,6 +1205,34 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SpringData</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Stream java8</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mybatis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mysql、postgresql</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
