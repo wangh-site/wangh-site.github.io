@@ -16,7 +16,7 @@
 <meta property="og:description" content="springboot配置swagger21、pom.xml导入依赖尽量使用版本为2.6以上的，低版本会报错 12345678910&lt;dependency&gt;    &lt;groupId&gt;io.springfox&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;springfox-swagger2&lt;&#x2F;artifactId&gt;    &lt;ver">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-22T15:09:12.000Z">
-<meta property="article:modified_time" content="2021-11-08T13:01:08.000Z">
+<meta property="article:modified_time" content="2021-11-13T05:40:29.475Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="springboot">
 <meta name="twitter:card" content="summary">
@@ -185,7 +185,8 @@
 <h3 id="3、添加文档内容"><a href="#3、添加文档内容" class="headerlink" title="3、添加文档内容"></a>3、添加文档内容</h3><p>通过添加<code>@ApiOperation</code>注解来给API增加说明、通过<code>@ApiImplicitParams</code>、<code>@ApiImplicitParam</code>注解来给参数增加说明。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiOperation(value=&quot;创建用户&quot;, notes=&quot;根据User对象创建用户&quot;)</span></span><br><span class="line"><span class="meta">@ApiImplicitParam(name = &quot;user&quot;, value = &quot;用户详细实体user&quot;, required = true, dataType = &quot;User&quot;)</span></span><br><span class="line"><span class="meta">@RequestMapping(value=&quot;&quot;, method=RequestMethod.POST)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">postUser</span><span class="params">(<span class="meta">@RequestBody</span> User user)</span> </span>&#123;</span><br><span class="line">    users.put(user.getId(), user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>完成。</p>
+
+
 
       
 
