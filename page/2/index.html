@@ -154,6 +154,123 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-springboot踩坑-resful接受对象属性为null" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/22/springboot%E8%B8%A9%E5%9D%91-resful%E6%8E%A5%E5%8F%97%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E4%B8%BAnull/">springboot踩坑-resful接受对象属性为null</a>
+    </h1>
+  
+
+        
+        <a href="/2021/05/22/springboot%E8%B8%A9%E5%9D%91-resful%E6%8E%A5%E5%8F%97%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E4%B8%BAnull/" class="archive-article-date">
+  	<time datetime="2021-05-22T12:36:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-22</time>
+</a>
+        
+		
+		<!-- 《开始添加字数统计-->
+		
+		
+
+<div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        
+       <i class="icon-statistics"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">415字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+         
+        <i class="icon-book icon"></i>
+        <span class="post-meta-item-text"> 阅读时长≈</span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+
+
+		
+    
+    <!-- 添加字数统计完成》 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="RequestBody-接收到的对象属性为null"><a href="#RequestBody-接收到的对象属性为null" class="headerlink" title="@RequestBody 接收到的对象属性为null"></a>@RequestBody 接收到的对象属性为null</h3><p>今天写springboot项目的时候，前端postman测试传入一个对象到接口，发现后端拿到的接口一直为null</p>
+<h4 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderInfo</span> </span>&#123;</span><br><span class="line">    <span class="comment">//车号</span></span><br><span class="line">    <span class="keyword">private</span> String TrainId;</span><br><span class="line">    <span class="comment">//身份证</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> IdCard;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="解释一下-Data这个注解"><a href="#解释一下-Data这个注解" class="headerlink" title="解释一下@Data这个注解"></a>解释一下@Data这个注解</h4><p>这个注解的作用主要是可以提高代码的简洁，使用这个注解可以省去大量的get和set、toString方法</p>
+<p>要使用这个注解，要先引用lombok（一个工具类库，用简单的注解形式来简化代码，提高开发效率）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="回到问题：为什么接受到的对象属性为null"><a href="#回到问题：为什么接受到的对象属性为null" class="headerlink" title="回到问题：为什么接受到的对象属性为null"></a>回到问题：为什么接受到的对象属性为null</h4><p>这个原因是因为spring mvc默认使用jackson对json进行解析，</p>
+<p>在实体类的字段名在转换为json的时候，字段的属性名改变了。</p>
+<h4 id="原因：springboot解析器在解析json的时候，因字段名驼峰命名无法匹配字段导致"><a href="#原因：springboot解析器在解析json的时候，因字段名驼峰命名无法匹配字段导致" class="headerlink" title="原因：springboot解析器在解析json的时候，因字段名驼峰命名无法匹配字段导致"></a>原因：springboot解析器在解析json的时候，因字段名驼峰命名无法匹配字段导致</h4><h4 id="解决方法：在实体类字段的set方法加上如下注解："><a href="#解决方法：在实体类字段的set方法加上如下注解：" class="headerlink" title="解决方法：在实体类字段的set方法加上如下注解："></a>解决方法：在实体类字段的set方法加上如下注解：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonProperty(value = &quot;trainid&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getTrainId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> TrainId;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@JsonProperty(value = &quot;trainid&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTrainId</span><span class="params">(String trainId)</span> </span>&#123;</span><br><span class="line">    TrainId = trainId;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@JsonProperty(value = &quot;idcard&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getIdCard</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> IdCard;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@JsonProperty(value = &quot;idcard&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIdCard</span><span class="params">(<span class="keyword">long</span> idCard)</span> </span>&#123;</span><br><span class="line">    IdCard = idCard;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>问题成功解决。</p>
+<p>这个问题的主要原因在于：springboot驼峰命名在生成字段的时候，会将单词中间的大写字母变为小写，并且中间加上下划线。</p>
+<p>实体类属性最好不要有大写字母，避免发生问题</p>
+<p>正确命名方法：id_card或者train_id</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/05/22/springboot%E8%B8%A9%E5%9D%91-resful%E6%8E%A5%E5%8F%97%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E4%B8%BAnull/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-几数之和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -386,6 +503,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">quartz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">springboot</a>
               </li>
              
@@ -398,11 +519,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mysql、postgresql</a>
+                <a href="javascript:void(0)" class="js-tag color3">打卡</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">打卡</a>
+                <a href="javascript:void(0)" class="js-tag color2">mysql、postgresql</a>
               </li>
             
             <div class="clearfix"></div>

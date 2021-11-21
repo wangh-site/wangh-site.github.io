@@ -154,6 +154,164 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-quartz" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/21/quartz/">quartz</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/21/quartz/" class="archive-article-date">
+  	<time datetime="2021-11-21T10:30:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-21</time>
+</a>
+        
+		
+		<!-- 《开始添加字数统计-->
+		
+		
+
+<div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        
+       <i class="icon-statistics"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.4k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+         
+        <i class="icon-book icon"></i>
+        <span class="post-meta-item-text"> 阅读时长≈</span>
+        <span class="post-count">5分</span>
+      </span>
+    </span>
+</div>
+
+
+		
+    
+    <!-- 添加字数统计完成》 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="quartz"><a href="#quartz" class="headerlink" title="quartz"></a>quartz</h2><p>Quartz 是任务调度的开源项目。Quartz 就是基于 Java 实现的任务调度框架。</p>
+<ul>
+<li>Quartz 官网地址：<a target="_blank" rel="noopener" href="http://www.quartz-scheduler.org/">http://www.quartz-scheduler.org</a></li>
+<li>Quartz 官网 - Examples：<a target="_blank" rel="noopener" href="http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/">http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/</a></li>
+</ul>
+<h2 id="Quartz-运行环境"><a href="#Quartz-运行环境" class="headerlink" title="Quartz 运行环境"></a>Quartz 运行环境</h2><ul>
+<li>Quartz 可以运行嵌入在两一个独立式应用程序</li>
+<li>Quartz 可以在应用程序服务器（或 Sevelet 容器） 内被实例化，并参与事务</li>
+<li>Quartz 可以作为独立的程序运行（其自己的 Java 虚拟机内），可以通过 RMI 使用</li>
+<li>Quartz 可以被实例化，作为独立的项目集群（负载平衡和故障转移功能），用于作业的执行</li>
+</ul>
+<h2 id="Quartz-设计模式"><a href="#Quartz-设计模式" class="headerlink" title="Quartz 设计模式"></a>Quartz 设计模式</h2><ul>
+<li><p>Buider 模式</p>
+</li>
+<li><p>Factory 模式</p>
+</li>
+<li><p>组件模式</p>
+</li>
+<li><p>链式编程</p>
+<p>这里说的设计模式，其实主要是针对 Quartz 使用过程中涉及的一些有用法。比如，通过 Factory 模式，生成调度器。比如，使用 Quartz 涉及了调度器、Job、触发器等组件。比如可通过 Build 方法创建出组件。</p>
+<h2 id="Quartz-核心概念"><a href="#Quartz-核心概念" class="headerlink" title="Quartz 核心概念"></a>Quartz 核心概念</h2><h3 id="任务-Job-和-JobDetail"><a href="#任务-Job-和-JobDetail" class="headerlink" title="任务 Job 和 JobDetail"></a>任务 Job 和 JobDetail</h3><p>Job 指的是你想要执行的任务类，每一个 Job 必须实现 <code>org.quartz.job</code> 接口，且只需要实现接口定义的 <code>execute()</code> 方法。在 <code>execute</code> 方法内编写任务的业务逻辑。</p>
+<p>Job 实例在 Quartz 中的生命周期：每次调度器执行 Job 时，它在调用 <code>execute</code> 方法前会创建一个新的 Job 实例，当调用完成之后，关联的 Job 对象实例会被释放，释放的实例会被垃圾回收机制回收。</p>
+<p>JobDetail: JobDetail 为 Job 实例提供许多设置属性，以及 jobDataMap 成员变量属性，它用来存储特定 Job 实例的状态信息，调度器需要借助 JobDetail 对象来添加 Job 实例。</p>
+<h3 id="触发器-Trigger"><a href="#触发器-Trigger" class="headerlink" title="触发器 Trigger"></a>触发器 Trigger</h3><p>Trigger 为你执行任务的触发器，比如你想每天定时 3 点发送一份统计邮件，Trigger 将会设置 3 点进行执行该任务。</p>
+<p>Trigger 主要包含两种：</p>
+<ul>
+<li><code>SimpleTrigger</code></li>
+<li><code>CronTrigger</code></li>
+</ul>
+<h3 id="调度器-Scheduler"><a href="#调度器-Scheduler" class="headerlink" title="调度器 Scheduler"></a>调度器 Scheduler</h3><p>Scheduler 为任务的调度器，它将任务 Job 及 触发器 Trigger 整合起来，负责基于 Trigger 设定的时间来执行 Job。</p>
+</li>
+</ul>
+<h2 id="Quartz-的体系结构"><a href="#Quartz-的体系结构" class="headerlink" title="Quartz 的体系结构"></a>Quartz 的体系结构</h2><p><a target="_blank" rel="noopener" href="https://imgtu.com/i/IjgBYq"><img src="https://z3.ax1x.com/2021/11/21/IjgBYq.png" alt="IjgBYq.png"></a></p>
+<h2 id="Quartz-几个常用-API"><a href="#Quartz-几个常用-API" class="headerlink" title="Quartz 几个常用 API"></a>Quartz 几个常用 API</h2><p>以下是 Quartz 编程 API 几个重要接口，也是 Quartz 的重要组件。</p>
+<ul>
+<li>Scheduler 用于与调度程序交互的主程序接口</li>
+</ul>
+<p>Scheduler 调度程序-任务执行计划表，只有安排进执行计划的任务 Job（通过 schduler.scheduleJob 方法安排进执行计划），当它预先定义的执行时间到了（任务触发器 trigger），该任务才会执行。</p>
+<ul>
+<li>Job 我们预先定义的希望在未来时间能够被调度程序执行的任务类，我们可以自定义。</li>
+<li>JobDetail 使用 jobDetail 来定义定时任务的实例，jobDetail 实例是通过 JobBuilder 类创建的。</li>
+<li>JobDataMap 可以包含不限量的（序列化）的数据对象，在 job 实例执行的时候，可以使用其中的数据。JobDataMap 是 Java Map 接口的一个实现，额外增加了一些便于存取基本类型的数据方法。</li>
+<li>Trigger 触发器，Trigger 对象是用来触发执行 Job 的。当调度一个 Job 时，我们实例触发器然后调整它的属性来满足 Job 执行的条件。表明任务在什么时候会执行。定义了一个已经被安排的任务将会在什么时候执行的时间条件，比如每 2 秒执行一次。</li>
+<li>JobBuilder 用于声明一个任务实例，也可以定义关于该任务的详情，比如任务名、组名等。这个声明的实例将会作为一个实际执行的任务。</li>
+<li>TriggerBuilder 触发器创造器，用于创建触发器 trigger 实例。</li>
+<li>JobListener、TriggerListener、SchedulerListener 监听器，用于对组件的监听。</li>
+</ul>
+<h2 id="入门案例"><a href="#入门案例" class="headerlink" title="入门案例"></a>入门案例</h2><h3 id="引入-Maven-依赖"><a href="#引入-Maven-依赖" class="headerlink" title="引入 Maven 依赖"></a>引入 Maven 依赖</h3><p>在 <a target="_blank" rel="noopener" href="https://mvnrepository.com/">https://mvnrepository.com</a> 官网搜索 quartz，选择了最新版本 <a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/org.quartz-scheduler/quartz/2.3.2">2.3.2</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 核心包 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.quartz-scheduler<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>quartz<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 工具包 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz-jobs --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.quartz-scheduler<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>quartz-jobs<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="任务类"><a href="#任务类" class="headerlink" title="任务类"></a>任务类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuartzHelloJob</span> <span class="keyword">implements</span> <span class="title">Job</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(JobExecutionContext jobExecutionContext)</span> <span class="keyword">throws</span> JobExecutionException </span>&#123;</span><br><span class="line">        <span class="comment">// 当前时间</span></span><br><span class="line">        Date date = <span class="keyword">new</span> Date();</span><br><span class="line">        DateFormat dateFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd:HH:mm:ss&quot;</span>);</span><br><span class="line">        String dateStr = dateFormat.format(date);</span><br><span class="line">        <span class="comment">// 工作内容</span></span><br><span class="line">        System.out.println(<span class="string">&quot;正在进行数据备份任务的定时执行，执行时间：&quot;</span> + dateStr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="主类"><a href="#主类" class="headerlink" title="主类"></a>主类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuartzHelloScheduler</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 调度器 Schduler，从工厂中获取调度器实例</span></span><br><span class="line">        Scheduler stdScheduler = StdSchedulerFactory.getDefaultScheduler();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 任务实例 JobDetail</span></span><br><span class="line">        <span class="comment">// 参数 1：任务的名称；参数 2：任务组的名称</span></span><br><span class="line">        JobDetail jobDetail = JobBuilder.newJob(QuartzHelloJob.class)</span><br><span class="line">                .withIdentity(<span class="string">&quot;job1&quot;</span>, <span class="string">&quot;jobGroup1&quot;</span>)</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 触发器 Trigger</span></span><br><span class="line">        <span class="comment">// 参数 1：触发器的名称；参数 2：触发器组的名称</span></span><br><span class="line">        Trigger trigger = TriggerBuilder.newTrigger()</span><br><span class="line">                .withIdentity(<span class="string">&quot;trigger1&quot;</span>, <span class="string">&quot;triggerGroup1&quot;</span>)</span><br><span class="line">                .withSchedule(SimpleScheduleBuilder.simpleSchedule().repeatSecondlyForever(<span class="number">5</span>))</span><br><span class="line">                .startNow()</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4. 通过调度器将触发器与任务实例关联，保证按照触发器定义的条件执行任务</span></span><br><span class="line">        stdScheduler.scheduleJob(jobDetail, trigger);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 5. 启动</span></span><br><span class="line">        stdScheduler.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Quartz-Scheduler-更新任务触发器"><a href="#Quartz-Scheduler-更新任务触发器" class="headerlink" title="Quartz Scheduler 更新任务触发器"></a>Quartz Scheduler 更新任务触发器</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Trigger trigger1 = TriggerBuilder.newTrigger()</span><br><span class="line">                .withIdentity(<span class="string">&quot;newTrigger&quot;</span>, <span class="string">&quot;triggerGroup1&quot;</span>)</span><br><span class="line">                .withSchedule(SimpleScheduleBuilder.simpleSchedule().repeatSecondlyForever(<span class="number">2</span>))</span><br><span class="line">                .startNow()</span><br><span class="line">                .build();</span><br><span class="line">        stdScheduler.rescheduleJob(TriggerKey.triggerKey(<span class="string">&quot;trigger1&quot;</span>,<span class="string">&quot;triggerGroup1&quot;</span>), trigger1);</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">quartz</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/21/quartz/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-打卡博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1274,123 +1432,6 @@
 
 
   
-    <article id="post-springboot踩坑-resful接受对象属性为null" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/22/springboot%E8%B8%A9%E5%9D%91-resful%E6%8E%A5%E5%8F%97%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E4%B8%BAnull/">springboot踩坑-resful接受对象属性为null</a>
-    </h1>
-  
-
-        
-        <a href="/2021/05/22/springboot%E8%B8%A9%E5%9D%91-resful%E6%8E%A5%E5%8F%97%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E4%B8%BAnull/" class="archive-article-date">
-  	<time datetime="2021-05-22T12:36:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-22</time>
-</a>
-        
-		
-		<!-- 《开始添加字数统计-->
-		
-		
-
-<div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        
-       <i class="icon-statistics"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">415字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-         
-        <i class="icon-book icon"></i>
-        <span class="post-meta-item-text"> 阅读时长≈</span>
-        <span class="post-count">1分</span>
-      </span>
-    </span>
-</div>
-
-
-		
-    
-    <!-- 添加字数统计完成》 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="RequestBody-接收到的对象属性为null"><a href="#RequestBody-接收到的对象属性为null" class="headerlink" title="@RequestBody 接收到的对象属性为null"></a>@RequestBody 接收到的对象属性为null</h3><p>今天写springboot项目的时候，前端postman测试传入一个对象到接口，发现后端拿到的接口一直为null</p>
-<h4 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderInfo</span> </span>&#123;</span><br><span class="line">    <span class="comment">//车号</span></span><br><span class="line">    <span class="keyword">private</span> String TrainId;</span><br><span class="line">    <span class="comment">//身份证</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> IdCard;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="解释一下-Data这个注解"><a href="#解释一下-Data这个注解" class="headerlink" title="解释一下@Data这个注解"></a>解释一下@Data这个注解</h4><p>这个注解的作用主要是可以提高代码的简洁，使用这个注解可以省去大量的get和set、toString方法</p>
-<p>要使用这个注解，要先引用lombok（一个工具类库，用简单的注解形式来简化代码，提高开发效率）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="回到问题：为什么接受到的对象属性为null"><a href="#回到问题：为什么接受到的对象属性为null" class="headerlink" title="回到问题：为什么接受到的对象属性为null"></a>回到问题：为什么接受到的对象属性为null</h4><p>这个原因是因为spring mvc默认使用jackson对json进行解析，</p>
-<p>在实体类的字段名在转换为json的时候，字段的属性名改变了。</p>
-<h4 id="原因：springboot解析器在解析json的时候，因字段名驼峰命名无法匹配字段导致"><a href="#原因：springboot解析器在解析json的时候，因字段名驼峰命名无法匹配字段导致" class="headerlink" title="原因：springboot解析器在解析json的时候，因字段名驼峰命名无法匹配字段导致"></a>原因：springboot解析器在解析json的时候，因字段名驼峰命名无法匹配字段导致</h4><h4 id="解决方法：在实体类字段的set方法加上如下注解："><a href="#解决方法：在实体类字段的set方法加上如下注解：" class="headerlink" title="解决方法：在实体类字段的set方法加上如下注解："></a>解决方法：在实体类字段的set方法加上如下注解：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonProperty(value = &quot;trainid&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getTrainId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> TrainId;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@JsonProperty(value = &quot;trainid&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTrainId</span><span class="params">(String trainId)</span> </span>&#123;</span><br><span class="line">    TrainId = trainId;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@JsonProperty(value = &quot;idcard&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getIdCard</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> IdCard;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@JsonProperty(value = &quot;idcard&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIdCard</span><span class="params">(<span class="keyword">long</span> idCard)</span> </span>&#123;</span><br><span class="line">    IdCard = idCard;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>问题成功解决。</p>
-<p>这个问题的主要原因在于：springboot驼峰命名在生成字段的时候，会将单词中间的大写字母变为小写，并且中间加上下划线。</p>
-<p>实体类属性最好不要有大写字母，避免发生问题</p>
-<p>正确命名方法：id_card或者train_id</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/05/22/springboot%E8%B8%A9%E5%9D%91-resful%E6%8E%A5%E5%8F%97%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E4%B8%BAnull/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1504,6 +1545,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">quartz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">springboot</a>
               </li>
              
@@ -1516,11 +1561,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mysql、postgresql</a>
+                <a href="javascript:void(0)" class="js-tag color3">打卡</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">打卡</a>
+                <a href="javascript:void(0)" class="js-tag color2">mysql、postgresql</a>
               </li>
             
             <div class="clearfix"></div>
