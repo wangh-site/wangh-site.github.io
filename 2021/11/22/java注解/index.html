@@ -6,17 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2021/5 | Blog of Wangh</title>
+  <title>java注解 | Blog of Wangh</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Wangh的文档箱子">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Blog of Wangh">
-<meta property="og:url" content="http://example.com/archives/2021/05/index.html">
+  <meta name="description" content="1.@Configuration注解该类等价 与XML中配置beans，相当于Ioc容器，它的某个方法头上如果注册了@Bean，就会作为这个Spring容器中的Bean，与xml中配置的bean意思一样。 @Configuration注解的类必需使用扫描.如下： 123456789101112131415@Configurationpublic class MainConfig &amp;#123;&#x2F;&#x2F;在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java注解">
+<meta property="og:url" content="http://example.com/2021/11/22/java%E6%B3%A8%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Blog of Wangh">
-<meta property="og:description" content="Wangh的文档箱子">
+<meta property="og:description" content="1.@Configuration注解该类等价 与XML中配置beans，相当于Ioc容器，它的某个方法头上如果注册了@Bean，就会作为这个Spring容器中的Bean，与xml中配置的bean意思一样。 @Configuration注解的类必需使用扫描.如下： 123456789101112131415@Configurationpublic class MainConfig &amp;#123;&#x2F;&#x2F;在">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-36dccee41455cbf24aa5dc4ea98900e0_b.jpg">
+<meta property="article:published_time" content="2021-11-22T12:53:33.000Z">
+<meta property="article:modified_time" content="2021-11-22T12:57:49.436Z">
 <meta property="article:author" content="Wangh">
+<meta property="article:tag" content="Java, spring">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic1.zhimg.com/v2-36dccee41455cbf24aa5dc4ea98900e0_b.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Blog of Wangh" type="application/atom+xml">
   
@@ -152,251 +157,505 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-java注解" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java注解
+    </h1>
+  
+
+        
+        <a href="/2021/11/22/java%E6%B3%A8%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2021-11-22T12:53:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-22</time>
+</a>
+        
+		
+		<!-- 《开始添加字数统计-->
+		
+		
+
+<div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        
+       <i class="icon-statistics"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">6.3k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+         
+        <i class="icon-book icon"></i>
+        <span class="post-meta-item-text"> 阅读时长≈</span>
+        <span class="post-count">27分</span>
+      </span>
+    </span>
+</div>
+
+
+		
     
+    <!-- 添加字数统计完成》 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-Configuration注解"><a href="#1-Configuration注解" class="headerlink" title="1.@Configuration注解"></a>1.@Configuration注解</h2><p>该类等价 与XML中配置beans，相当于Ioc容器，它的某个方法头上如果注册了@Bean，就会作为这个Spring容器中的Bean，与xml中配置的bean意思一样。</p>
+<p>@Configuration注解的类必需使用扫描.如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在properties文件里配置</span></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;wx_appid&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String appid;</span><br><span class="line"> <span class="function"><span class="keyword">protected</span> <span class="title">MainConfig</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> WxMpService <span class="title">wxMpService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    WxMpService wxMpService = <span class="keyword">new</span> WxMpServiceImpl();</span><br><span class="line">    wxMpService.setWxMpConfigStorage(wxMpConfigStorage());</span><br><span class="line">    <span class="keyword">return</span> wxMpService;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义一个MainConfig，用@Configuration注解，那MainConfig相当于xml里的beans,里面用@Bean注解的和xml里定义的bean等价，用扫描该类，最终我们可以在程序里用@AutoWired或@Resource注解取得用@Bean注解的bean，和用xml先配置bean然后在程序里自动注入一样。目的是减少xml里配置。</p>
+<h2 id="2-Vaue注解"><a href="#2-Vaue注解" class="headerlink" title="2.@Vaue注解"></a>2.@Vaue注解</h2><p>为了简化从properties里取配置，可以使用@Value, 可以在properties文件中的配置值。</p>
+<p>在dispatcher-servlet.xml里引入properties文件。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">&quot;classpath:test.properties&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在程序里使用@Value:</p>
+<p>@Value(“${wx_appid}”)</p>
+<p>public String appid；</p>
+<p>即使给变量赋了初值也会以配置文件的值为准。</p>
+<h2 id="3-Controller-Service-Repository-Component"><a href="#3-Controller-Service-Repository-Component" class="headerlink" title="3.@Controller,@Service,@Repository,@Component"></a>3.@Controller,@Service,@Repository,@Component</h2><p>目前4种注解意思是一样，并没有什么区别，区别只是名字不同。使用方法：</p>
+<p>1.使用扫描被注解的类</p>
+<p>2.在类上写注解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-PostConstruct-和-PreDestory"><a href="#4-PostConstruct-和-PreDestory" class="headerlink" title="4. @PostConstruct 和 @PreDestory"></a>4. @PostConstruct 和 @PreDestory</h2><p><a href="https://link.zhihu.com/?target=http://blog.csdn.net/topwqp/article/details/8681497">实现初始化和销毁bean之前进行的操作</a>，只能有一个方法可以用此注释进行注释，方法不能有参数，返回值必需是void,方法需要是非静态的。</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestService</span> </span>&#123;</span><br><span class="line"><span class="meta">@PostConstruct</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">init</span><span class="params">()</span></span>&#123;  </span><br><span class="line">    System.out.println(<span class="string">&quot;初始化&quot;</span>);  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@PreDestroy</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">dostory</span><span class="params">()</span></span>&#123;  </span><br><span class="line">    System.out.println(<span class="string">&quot;销毁&quot;</span>);  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>@PostConstruct：在构造方法和init方法（如果有的话）之间得到调用，且只会执行一次。</p>
+<p>@PreDestory：注解的方法在destory()方法调用后得到执行。</p>
+<p>引深一点，Spring 容器中的 Bean 是有生命周期的，Spring 允许在 Bean 在初始化完成后以及 Bean 销毁前执行特定的操作，常用的设定方式有以下三种：</p>
+<p>1.通过实现 InitializingBean/DisposableBean 接口来定制初始化之后/销毁之前的操作方法；</p>
+<p>2.通过 元素的 init-method/destroy-method属性指定初始化之后 /销毁之前调用的操作方法；</p>
+<p>3.在指定方法上加上@PostConstruct 或@PreDestroy注解来制定该方法是在初始化之后还是销毁之前调用</p>
+<p>但他们之前并不等价。即使3个方法都用上了，也有先后顺序.</p>
+<p><strong>Constructor &gt; @PostConstruct &gt;InitializingBean &gt; init-method</strong></p>
+<h2 id="5-Primary"><a href="#5-Primary" class="headerlink" title="5. @Primary"></a>5. @Primary</h2><p>自动装配时当出现多个Bean候选者时，被注解为@Primary的Bean将作为首选者，否则将抛出异常。</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Apple</span> <span class="keyword">implements</span> <span class="title">Fruit</span></span>&#123;  </span><br><span class="line"><span class="meta">@Override</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;我是苹果&quot;</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="meta">@Primary</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pear</span> <span class="keyword">implements</span> <span class="title">Fruit</span></span>&#123;  </span><br><span class="line"><span class="meta">@Override</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">(String lyrics)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;梨子&quot;</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FruitService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//Fruit有2个实例子类，因为梨子用@Primary，那么会使用Pear注入</span></span><br><span class="line">    <span class="meta">@Autowired</span>  </span><br><span class="line">    <span class="keyword">private</span> Fruit fruit;  </span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span></span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> fruit.hello();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-Lazy-true"><a href="#6-Lazy-true" class="headerlink" title="6. @Lazy(true)"></a>6. @Lazy(true)</h2><p>用于指定该Bean是否取消预初始化，用于注解类，延迟初始化。</p>
+<h2 id="7-Autowired"><a href="#7-Autowired" class="headerlink" title="7. @Autowired"></a>7. @Autowired</h2><p>Autowired默认先按byType，如果发现找到多个bean，则，又按照byName方式比对，如果还有多个，则报出异常。</p>
+<p>1.可以手动指定按byName方式注入，使用@Qualifier。</p>
+<p>//通过此注解完成从spring配置文件中 查找满足Fruit的bean,然后按//@Qualifier指定pean</p>
+<p>@Autowired</p>
+<p>@Qualifier(“pean”)</p>
+<p>public Fruit fruit;</p>
+<p>2.如果要允许null 值，可以设置它的required属性为false，如：</p>
+<p>@Autowired(required=false)</p>
+<p>public Fruit fruit;</p>
+<h2 id="8-Resource"><a href="#8-Resource" class="headerlink" title="8. @Resource"></a>8. @Resource</h2><p>默认按 byName自动注入,如果找不到再按byType找bean,如果还是找不到则抛异常，无论按byName还是byType如果找到多个，则抛异常。</p>
+<p>可以手动指定bean,它有2个属性分别是name和type，使用name属性，则使用byName的自动注入，而使用type属性时则使用byType自动注入。</p>
+<p>@Resource(name=”bean名字”)</p>
+<p>或</p>
+<p>@Resource(type=”bean的class”)</p>
+<p>这个注解是属于J2EE的，减少了与spring的耦合。</p>
+<h2 id="9-Async"><a href="#9-Async" class="headerlink" title="9. @Async"></a>9. @Async</h2><p>java里使用线程用3种方法：</p>
+<ol>
+<li>继承Thread，重写run方法</li>
+<li>实现Runnable,重写run方法</li>
+<li>使用Callable和Future接口创建线程，并能得到返回值。</li>
+</ol>
+<p>前2种简单，第3种方式特别提示一下，例子如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyCallable</span> <span class="keyword">implements</span> <span class="title">Callable</span>&lt;<span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 与run()方法不同的是，call()方法具有返回值</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">&quot; &quot;</span> + i);</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>main方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Callable&lt;Integer&gt; myCallable = <span class="keyword">new</span> MyCallable();    <span class="comment">// 创建MyCallable对象</span></span><br><span class="line">        FutureTask&lt;Integer&gt; ft = <span class="keyword">new</span> FutureTask&lt;Integer&gt;(myCallable); <span class="comment">//使用FutureTask来包装MyCallable对象</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">&quot; &quot;</span> + i);</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">30</span>) &#123;</span><br><span class="line">                Thread thread = <span class="keyword">new</span> Thread(ft);   <span class="comment">//FutureTask对象作为Thread对象的target创建新的线程</span></span><br><span class="line">                thread.start();                      <span class="comment">//线程进入到就绪状态</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;主线程for循环执行完毕..&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> sum = ft.get();            <span class="comment">//取得新创建的新线程中的call()方法返回的结果</span></span><br><span class="line">            System.out.println(<span class="string">&quot;sum = &quot;</span> + sum);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而使用@Async可视为第4种方法。基于@Async标注的方法，称之为异步方法,这个注解用于标注某个方法或某个类里面的所有方法都是需要异步处理的。被注解的方法被调用的时候，会在新线程中执行，而调用它的方法会在原来的线程中执行。</p>
+<p>application.xml形势的配置：</p>
+<p>第一步配置XML。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--扫描注解，其中包括@Async --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;com.test&quot;</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 支持异步方法执行, 指定一个缺省的executor给@Async使用--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">task:annotation-driven</span> <span class="attr">executor</span>=<span class="string">&quot;defaultAsyncExecutor&quot;</span>  /&gt;</span> </span><br><span class="line">&lt;!—配置一个线程执行器--&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">task:executor</span> <span class="attr">id</span>=<span class="string">&quot; defaultAsyncExecutor &quot;</span><span class="attr">pool-size</span>=<span class="string">&quot;100-10000&quot;</span> <span class="attr">queue-capacity</span>=<span class="string">&quot;10&quot;</span> <span class="attr">keep-alive</span> =<span class="string">”5”/</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>参数解读：</p>
+<p>配置参数：</p>
+<p>id：当配置多个executor时，被@Async(“id”)指定使用；也被作为线程名的前缀。</p>
+<p>pool-size：</p>
+<p>core size：最小的线程数，缺省：1</p>
+<p>max size：最大的线程数，缺省：Integer.MAX_VALUE</p>
+<p>queue-capacity：当最小的线程数已经被占用满后，新的任务会被放进queue里面，当这个queue的capacity也被占满之后，pool里面会创建新线程处理这个任务，直到总线程数达到了max size，这时系统会拒绝这个任务并抛出TaskRejectedException异常（缺省配置的情况下，可以通过rejection-policy来决定如何处理这种情况）。缺省值为：Integer.MAX_VALUE</p>
+<p>keep-alive：超过core size的那些线程，任务完成后，再经过这个时长（秒）会被结束掉</p>
+<p>rejection-policy：当pool已经达到max size的时候，如何处理新任务</p>
+<p>ABORT（缺省）：抛出TaskRejectedException异常，然后不执行DISCARD：不执行，也不抛出异常</p>
+<p>DISCARD_OLDEST：丢弃queue中最旧的那个任务</p>
+<p>CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行</p>
+<p>第二步在类或方法上添加@Async，当调用该方法时，则该方法即是用异常执行的方法单独开个新线程执行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Async(“可以指定执行器id，也可以不指定”)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testAsyncVoid</span> <span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//让程序暂停100秒，相当于执行一个很耗时的任务</span></span><br><span class="line">    System.out.println(“异常执行打印字符串”);</span><br><span class="line">            Thread.sleep(<span class="number">100000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>当在外部调用testAsync方法时即在新线程中执行，由上面执行器去维护线程。</p>
+<p>总结：先用context:component-scan去扫描注解，让spring能识别到@Async注解，然后task:annotation-driven去驱动@Async注解，并可以指定默认的线程执行器executor。那么当用@Async注解的方法或类得到调用时，线程执行器会创建新的线程去执行。</p>
+<p>上面方法是无返回值的情况，还有异常方法有返回值的例子。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Async</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Future&lt;String&gt; <span class="title">testAsyncReturn</span> <span class="params">()</span> </span>&#123;  </span><br><span class="line">    System.out.println(<span class="string">&quot;Execute method asynchronously - &quot;</span>  </span><br><span class="line">      + Thread.currentThread().getName());  </span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">        Thread.sleep(<span class="number">5000</span>);  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AsyncResult&lt;String&gt;(<span class="string">&quot;hello world !!!!&quot;</span>);  </span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </span><br><span class="line">        <span class="comment">//  </span></span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>返回的数据类型为Future类型，接口实现类是AsyncResult.</p>
+<p>调用方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Future&lt;String&gt; future = cc.testAsyncReturn();  </span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;  <span class="comment">///这里使用了循环判断，等待获取结果信息  </span></span><br><span class="line">        <span class="keyword">if</span> (future.isDone()) &#123;  <span class="comment">//判断是否执行完毕  </span></span><br><span class="line">            System.out.println(<span class="string">&quot;Result from asynchronous process - &quot;</span> + future.get());  </span><br><span class="line">            <span class="keyword">break</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">        System.out.println(<span class="string">&quot;Continue doing something else. &quot;</span>);  </span><br><span class="line">        Thread.sleep(<span class="number">1000</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过不停的检查Future的状态来获取当前的异步方法是否执行完毕</p>
+<p>参考文章</p>
+<p>编程的方式使用@Async:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span>  </span><br><span class="line"><span class="meta">@EnableAsync</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> corePoolSize = <span class="number">10</span>;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxPoolSize = <span class="number">200</span>; </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> queueCapacity = <span class="number">10</span>;  </span><br><span class="line">    <span class="keyword">private</span> String ThreadNamePrefix = <span class="string">&quot;MyLogExecutor-&quot;</span>;  </span><br><span class="line"><span class="meta">@Bean</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> Executor <span class="title">logExecutor</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    ThreadPoolTaskExecutor executor = <span class="keyword">new</span> ThreadPoolTaskExecutor();  </span><br><span class="line">    executor.setCorePoolSize(corePoolSize);  </span><br><span class="line">    executor.setMaxPoolSize(maxPoolSize);  </span><br><span class="line">    executor.setQueueCapacity(queueCapacity);  </span><br><span class="line">    executor.setThreadNamePrefix(ThreadNamePrefix);  </span><br><span class="line">    <span class="comment">// rejection-policy：当pool已经达到max size的时候，如何处理新任务  </span></span><br><span class="line">    <span class="comment">// CALLER_RUNS：不在新线程中执行任务，而是有调用者所在的线程来执行  </span></span><br><span class="line">    executor.setRejectedExecutionHandler(<span class="keyword">new</span> ThreadPoolExecutor.CallerRunsPolicy());  </span><br><span class="line">    executor.initialize();  </span><br><span class="line">    <span class="keyword">return</span> executor;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="10-Named"><a href="#10-Named" class="headerlink" title="10.@Named"></a>10.@Named</h2><p>@Named和Spring的@Component功能相同。@Named可以有值，如果没有值生成的Bean名称默认和类名相同。比如</p>
+<p>@Named</p>
+<p>public class Person</p>
+<p>或</p>
+<p>@Named(“cc”)</p>
+<p>public class Person</p>
+<h2 id="11-Inject"><a href="#11-Inject" class="headerlink" title="11. @Inject"></a>11. @Inject</h2><p>使用@Inject需要引用javax.inject.jar，它与Spring没有关系，是jsr330规范。</p>
+<p>与@Autowired有互换性。</p>
+<h2 id="12-Singleton"><a href="#12-Singleton" class="headerlink" title="12. @Singleton"></a>12. @Singleton</h2><p>只要在类上加上这个注解，就可以实现一个单例类，不需要自己手动编写单例实现类。</p>
+<h2 id="13-Valid-Valided"><a href="#13-Valid-Valided" class="headerlink" title="13.@Valid,@Valided"></a>13.@Valid,@Valided</h2><p>@Valid</p>
+<p>网上一大片使用@Valid失效不能用的情况。为什么呢？</p>
+<p>1.@Valid必需使用在以@RequestBody接收参数的情况下。</p>
+<p>2.使用ajax以POST方式提示数据，禁止用Fiddler以及浏览器直接访问的方式测试接口</p>
+<p>3.用添加注解驱动。</p>
+<p>4.@Valid是应用在javabean上的校验。</p>
+<p>5.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-validator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.2.0.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-annotations<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.jackson<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-mapper-asl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.module<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-module-jaxb-annotations<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这些jar包是需要的。@Valid是使用hibernate validation的时候使用，可参数下面介绍的@RequestBody</p>
+<p>6.@Valid下后面紧跟BindingResult result，验证结果保存在result</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/test&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">testValid</span><span class="params">(<span class="meta">@Valid</span> User user, BindingResult result)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (result.hasErrors())&#123;</span><br><span class="line">            List&lt;ObjectError&gt; errorList = result.getAllErrors();</span><br><span class="line">            <span class="keyword">for</span>(ObjectError error : errorList)&#123;</span><br><span class="line">                System.out.println(error.getDefaultMessage());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;test&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在入参User上添加了@Valid做校验，在User类里属性上实行实际的特定校验。</p>
+<p>例如在User的name属性上加</p>
+<p>@NotBlank</p>
+<p>private String name;</p>
+<p>全部参数校验如下：</p>
+<p>空检查</p>
+<p>@Null 验证对象是否为null</p>
+<p>@NotNull 验证对象是否不为null, 无法查检长度为0的字符串</p>
+<p>@NotBlank 检查约束字符串是不是Null还有被Trim的长度是否大于0,只对字符串,且会去掉前后空格.</p>
+<p>@NotEmpty 检查约束元素是否为NULL或者是EMPTY.</p>
+<p>Booelan检查</p>
+<p>@AssertTrue 验证 Boolean 对象是否为 true</p>
+<p>@AssertFalse 验证 Boolean 对象是否为 false</p>
+<p>长度检查</p>
+<p>@Size(min=, max=) 验证对象（Array,Collection,Map,String）长度是否在给定的范围之内</p>
+<p>@Length(min=, max=)验证注解的元素值长度在min和max区间内</p>
+<p>日期检查</p>
+<p>@Past 验证 Date 和 Calendar 对象是否在当前时间之前</p>
+<p>@Future 验证 Date 和 Calendar 对象是否在当前时间之后</p>
+<p>@Pattern 验证 String 对象是否符合正则表达式的规则</p>
+<p>数值检查，建议使用在Stirng,Integer类型，不建议使用在int类型上，因为表单值为“”时无法转换为int，但可以转换为Stirng为””,Integer为null</p>
+<p>@Min(value=””) 验证 Number 和 String 对象是否大等于指定的值</p>
+<p>@Max(value=””) 验证 Number 和 String 对象是否小等于指定的值</p>
+<p>@DecimalMax(value=值) 被标注的值必须不大于约束中指定的最大值. 这个约束的参数是一个通过BigDecimal定义的最大值的字符串表示.小数存在精度</p>
+<p>@DecimalMin(value=值) 被标注的值必须不小于约束中指定的最小值. 这个约束的参数是一个通过BigDecimal定义的最小值的字符串表示.小数存在精度</p>
+<p>@Digits 验证 Number 和 String 的构成是否合法</p>
+<p>@Digits(integer=,fraction=)验证字符串是否是符合指定格式的数字，interger指定整数精度，fraction指定小数精度。</p>
+<p>@Range(min=, max=) 检查数字是否介于min和max之间.</p>
+<p>@Range(min=10000,max=50000,message=”range.bean.wage”)</p>
+<p>private BigDecimal wage;</p>
+<p>@Valid 递归的对关联对象进行校验, 如果关联对象是个集合或者数组,那么对其中的元素进行递归校验,如果是一个map,则对其中的值部分进行校验.(是否进行递归验证)</p>
+<p>@CreditCardNumber信用卡验证</p>
+<p>@Email 验证是否是邮件地址，如果为null,不进行验证，算通过验证。</p>
+<p>@ScriptAssert(lang=,script=, alias=)</p>
+<p>@URL(protocol=,host=,port=,regexp=, flags=)</p>
+<p>@Validated</p>
+<p>@Valid是对javabean的校验，如果想对使用@RequestParam方式接收参数方式校验使用@Validated</p>
+<p>使用@Validated的步骤：</p>
+<p>第一步：定义全局异常，让该全局异常处理器能处理所以验证失败的情况，并返回给前台失败提示数据。如下，该类不用在任何xml里配置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.validation.ValidationException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.HttpStatus;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> org.springframework.validation.beanvalidation.MethodValidationPostProcessor;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseStatus;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalExceptionHandler</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MethodValidationPostProcessor <span class="title">methodValidationPostProcessor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MethodValidationPostProcessor();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">@ExceptionHandler</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@ResponseStatus(HttpStatus.BAD_REQUEST)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">handle</span><span class="params">(ValidationException exception)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;bad request, &quot;</span> + exception.getMessage());</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;bad request, &quot;</span> + exception.getMessage();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第二步。在XXController.java头上添加@Validated，然后在@RequestParam后台使用上面介绍的验证注解，比如@NotBlank,@Rank.</p>
+<p>如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/test&quot;)</span></span><br><span class="line"><span class="meta">@Validated</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> <span class="keyword">extends</span> <span class="title">BaseController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(value = &quot;testValidated&quot;, method = RequestMethod.GET)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@ResponseStatus(HttpStatus.BAD_REQUEST)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">testValidated</span><span class="params">(<span class="meta">@RequestParam(value = &quot;pk&quot;, required = true)</span> <span class="meta">@Size(min = 1, max = 3)</span> String pk,</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="meta">@RequestParam(value = &quot;age&quot;, required = false)</span> <span class="meta">@Range(min = 1, max = 3)</span> String age)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;pk:&quot;</span> + pk + <span class="string">&quot;,age=&quot;</span> + age;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> buildFailure(<span class="string">&quot;消息列表查询失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当入非法参数是，会被全局处理器拦截到，（Spring切面编程方式），如果参数非法即刻给前台返回错误数据。</p>
+<p>测试：<a href="https://link.zhihu.com/?target=http://127.0.0.1:8080/TestValidate/test/testValidated?pk=2&age=12">http://127.0.0.1:8080/TestValidate/test/testValidated?pk=2&amp;age=12</a></p>
+<p>返回：</p>
+<p>注意</p>
+<p>@Valid是使用hibernateValidation.jar做校验</p>
+<p>@Validated是只用springValidator校验机制使用</p>
+<p>gitHub下载地址</p>
+<p>@Validated与@RequestBody结合使用时，在接口方法里要增加@Valid。例如：</p>
+<p>public Object edit(@Valid @RequestBody AddrRo addrRo) {…..}</p>
+<h2 id="14-RequestBody"><a href="#14-RequestBody" class="headerlink" title="14.@RequestBody"></a>14.@RequestBody</h2><p>@RequestBody（required=true）</p>
+<p>:有个默认属性required,默认是true,当body里没内容时抛异常。</p>
+<p>application/x-www-form-urlencoded：窗体数据被编码为名称/值对。这是标准的编码格式。这是默认的方式 multipart/form-data：窗体数据被编码为一条消息，页上的每个控件对应消息中的一个部分。二进制数据传输方式，主要用于上传文件</p>
+<p>注意：必需使用POST方式提交参数，需要使用ajax方式请求，用Fiddler去模拟post请求不能。</p>
+<p>引用jar包：</p>
+<p>Spring相关jar包。</p>
+<p>以及</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;jackson-annotations&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;<span class="number">2.5</span><span class="number">.3</span>&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;jackson-core&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;<span class="number">2.5</span><span class="number">.3</span>&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;<span class="number">2.5</span><span class="number">.3</span>&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>dispatchServlet-mvc.xml配置 第一种，直接配置MappingJackson2HttpMessageCoverter：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;messageConverters&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.http.converter.json.MappingJackson2HttpMessageConverter&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>第二种： 就不用配置上面bean,默认会配好。</p>
+<p>Ajax请求：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function  <span class="title">testRequestBody</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> o = &#123;<span class="string">&quot;status&quot;</span>:<span class="number">9</span>&#125;;</span><br><span class="line">     jQuery.ajax(&#123;</span><br><span class="line">            type: <span class="string">&quot;POST&quot;</span>,</span><br><span class="line">            url: <span class="string">&quot;http://127.0.0.1:8080/TestValidate/test/testValid&quot;</span>,</span><br><span class="line">            xhrFields:&#123;</span><br><span class="line">                withCredentials:<span class="keyword">true</span></span><br><span class="line">            &#125;,</span><br><span class="line">            data: JSON.stringify(o),</span><br><span class="line">            contentType: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">            dataType: <span class="string">&quot;json&quot;</span>,</span><br><span class="line">            async: <span class="keyword">false</span>,</span><br><span class="line">            success:function (data) &#123;</span><br><span class="line">                console.log(data);</span><br><span class="line">            &#125;,</span><br><span class="line">        error: function(res) &#123;</span><br><span class="line">             console.log(res);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>}</p>
+<p>后台XXXcontroller.java:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value=&quot;/ testValid &quot;,method=RequestMethod.POST)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">setOrderInfo</span><span class="params">(<span class="meta">@RequestBody</span> InfoVO infoVO,HttpServletRequest request, HttpServletResponse response)</span></span>&#123;</span><br><span class="line">        InfoVO cVo = getInfoVo(infoVO);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>开发时，不是报415，就是400错误，头都大了。还是细节没做到位，注意下面几个要点：</p>
+<p>Content-Type必需是application/json</p>
+<p>需要jackson-databind.jar</p>
+<p>要配置或直接配置bean</p>
+<p>XXXController.jar在post方式接收数据</p>
+<p>最最重要的，使用ajax以post方式请求。不能用Fiddler模拟,不然会出错。</p>
+<h2 id="15-CrossOrigin"><a href="#15-CrossOrigin" class="headerlink" title="15.@CrossOrigin"></a>15.@CrossOrigin</h2><p>是Cross-Origin ResourceSharing（跨域资源共享）的简写</p>
+<p>作用是解决跨域访问的问题，在Spring4.2以上的版本可直接使用。在类上或方法上添加该注解</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@CrossOrigin</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> <span class="keyword">extends</span> <span class="title">BaseController</span> </span>&#123;</span><br><span class="line">XXXX</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果失效则可能方法没解决是GET还是POST方式，指定即可解决问题。</p>
+<h2 id="16-RequestParam"><a href="#16-RequestParam" class="headerlink" title="16.@RequestParam"></a>16.@RequestParam</h2><p>作用是提取和解析请求中的参数。@RequestParam支持类型转换，类型转换目前支持所有的基本Java类型</p>
+<p>@RequestParam([value=”number”], [required=false]) String number</p>
+<p>将请求中参数为number映射到方法的number上。required=false表示该参数不是必需的，请求上可带可不带。</p>
+<h3 id="17-PathVariable，-RequestHeader，-CookieValue，-RequestParam-RequestBody，-SessionAttributes-ModelAttribute"><a href="#17-PathVariable，-RequestHeader，-CookieValue，-RequestParam-RequestBody，-SessionAttributes-ModelAttribute" class="headerlink" title="17.@PathVariable，@RequestHeader，@CookieValue，@RequestParam, @RequestBody，@SessionAttributes, @ModelAttribute"></a>17.@PathVariable，@RequestHeader，@CookieValue，@RequestParam, @RequestBody，@SessionAttributes, @ModelAttribute</h3><p>@PathVariable：处理requet uri部分,当使用@RequestMapping URI template 样式映射时， 即someUrl/{paramId}, 这时的paramId可通过 @Pathvariable注解绑定它传过来的值到方法的参数上</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span> </span><br><span class="line"><span class="meta">@RequestMapping(&quot;/owners/&#123;a&#125;&quot;)</span> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RelativePathUriTemplateController</span> </span>&#123; </span><br><span class="line">  <span class="meta">@RequestMapping(&quot;/pets/&#123;b&#125;&quot;)</span> </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findPet</span><span class="params">(<span class="meta">@PathVariable(&quot;a&quot;)</span> String a,<span class="meta">@PathVariable</span> String b, Model model)</span> </span>&#123;     </span><br><span class="line">    <span class="comment">// implementation omitted </span></span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestHeader</span>，<span class="meta">@CookieValue</span>: 处理request header部分的注解</span><br><span class="line"></span><br><span class="line">将头部信息绑定到方法参数上：</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/test&quot;)</span> </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">displayHeaderInfo</span><span class="params">(<span class="meta">@RequestHeader(&quot;Accept-Encoding&quot;)</span> String encoding, </span></span></span><br><span class="line"><span class="params"><span class="function">                              <span class="meta">@RequestHeader(&quot;Keep-Alive&quot;)</span><span class="keyword">long</span> keepAlive)</span>  </span>&#123; </span><br><span class="line"></span><br><span class="line">  <span class="comment">//... </span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//将cookie里JSESSIONID绑定到方法参数上</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/test&quot;)</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">displayHeaderInfo</span><span class="params">(<span class="meta">@CookieValue(&quot;JSESSIONID&quot;)</span> String cookie)</span>  </span>&#123;  </span><br><span class="line"></span><br><span class="line">  <span class="comment">//...  </span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="18-Scope"><a href="#18-Scope" class="headerlink" title="18.@Scope"></a>18.@Scope</h2><p>配置bean的作用域。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/test&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Scope(&quot;prototype&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>默认是单例模式，即@Scope(“singleton”),</p>
+<p>singleton：单例，即容器里只有一个实例对象。</p>
+<p>prototype：多对象，每一次请求都会产生一个新的bean实例，Spring不无法对一个prototype bean的整个生命周期负责，容器在初始化、配置、装饰或者是装配完一个prototype实例后，将它交给客户端，由程序员负责销毁该对象，不管何种作用域，容器都会调用所有对象的初始化生命周期回调方法，而对prototype而言，任何配置好的析构生命周期回调方法都将不会被调用</p>
+<p>request：对每一次HTTP请求都会产生一个新的bean，同时该bean仅在当前HTTP request内有效</p>
+<p>web.xml增加如下配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>org.springframework.web.context.request.RequestContextListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>session：该针对每一次HTTP请求都会产生一个新的bean，同时该bean仅在当前HTTP session内有效。也要在web.xml配置如下代码：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>org.springframework.web.context.request.RequestContextListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>global session：作用不大，可不用管他。</p>
+<h2 id="19-ResponseStatus"><a href="#19-ResponseStatus" class="headerlink" title="19.@ResponseStatus"></a>19.@ResponseStatus</h2><p>@ResponseStatus用于修饰一个类或者一个方法，修饰一个类的时候，一般修饰的是一个异常类,当处理器的方法被调用时，@ResponseStatus指定的code和reason会被返回给前端。value属性是http状态码，比如404，500等。reason是错误信息</p>
+<p>当修改类或方法时，只要该类得到调用，那么value和reason都会被添加到response里</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseStatus(value=HttpStatus.FORBIDDEN, reason=&quot;出现了错误&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span></span>&#123;</span><br><span class="line">XXXXX</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当某处抛出UserException时，则会把value和reason返回给前端。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/testResponseStatus&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">testResponseStatus</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(i==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UserNotMatchException();</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalExceptionHandler</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MethodValidationPostProcessor <span class="title">methodValidationPostProcessor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MethodValidationPostProcessor();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">@ExceptionHandler</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@ResponseStatus(value=HttpStatus.BAD_REQUEST,reason=&quot;哈哈&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">handle</span><span class="params">(ValidationException exception)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;bad request, &quot;</span> + exception.getMessage());</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;bad request, &quot;</span> + exception.getMessage();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p>正如上面所说，该方法得到调用，不论是否抛异常，都会把value和reason添加到response里。</p>
+<p>总结：@ResponseStatus是为了在方法或类得到调用时将指定的code和reason添加到response里返前端，就像服务器常给我们报的404错误一样，我们可以自己指定高逼格错误提示。</p>
+<h2 id="20-RestController"><a href="#20-RestController" class="headerlink" title="20.@RestController"></a>20.@RestController</h2><p>@RestController = @Controller + @ResponseBody。</p>
+<p>是2个注解的合并效果，即指定了该controller是组件，又指定方法返回的是String或json类型数据，不会解决成jsp页面，注定不够灵活，如果一个Controller即有SpringMVC返回视图的方法，又有返回json数据的方法即使用@RestController太死板。</p>
+<p>灵活的作法是：定义controller的时候，直接使用@Controller，如果需要返回json可以直接在方法中添加@ResponseBody</p>
+<h2 id="21-ControllerAdvice"><a href="#21-ControllerAdvice" class="headerlink" title="21.@ControllerAdvice"></a>21.@ControllerAdvice</h2><p>官方解释是：It is typically used todefine@ExceptionHandler,</p>
+<p>@InitBinder, and@ModelAttribute methods that apply to all@RequestMapping methods</p>
+<p>意思是：即把@ControllerAdvice注解内部使用@ExceptionHandler、@InitBinder、@ModelAttribute注解的方法应用到所有的 @RequestMapping注解的方法。非常简单，不过只有当使用@ExceptionHandler最有用，另外两个用处不大。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalExceptionHandler</span> </span>&#123;  </span><br><span class="line">    <span class="meta">@ExceptionHandler(SQLException.class)</span>  </span><br><span class="line">    <span class="meta">@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR,reason=”sql查询错误”)</span>  </span><br><span class="line">    <span class="meta">@ResponseBody</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> ExceptionResponse <span class="title">handleSQLException</span><span class="params">(HttpServletRequest request, Exception ex)</span> </span>&#123;  </span><br><span class="line">        String message = ex.getMessage();  </span><br><span class="line">        <span class="keyword">return</span> ExceptionResponse.create(HttpStatus.INTERNAL_SERVER_ERROR.value(), message);  </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>即表示让Spring捕获到所有抛出的SQLException异常，并交由这个被注解的handleSQLException方法处理，同时使用@ResponseStatus指定了code和reason写到response上，返回给前端。</p>
+<h2 id="22-元注解包括-Retention-Target-Document-Inherited四种"><a href="#22-元注解包括-Retention-Target-Document-Inherited四种" class="headerlink" title="22.元注解包括 @Retention @Target @Document @Inherited四种"></a>22.元注解包括 @Retention @Target @Document @Inherited四种</h2><p>元注解是指注解的注解，比如我们看到的ControllerAdvice注解定义如下。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> ControllerAdvice &#123;</span><br><span class="line">    XXX</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>@Retention: 定义注解的保留策略：</p>
+<p>@Retention(RetentionPolicy.SOURCE) //注解仅存在于源码中，在class字节码文件中不包含</p>
+<p>@Retention(RetentionPolicy.CLASS) //默认的保留策略，注解会在class字节码文件中存在，但运行时无法获得，</p>
+<p>@Retention(RetentionPolicy.RUNTIME) //注解会在class字节码文件中存在，在运行时可以通过反射获取到</p>
+<p>@Target：定义注解的作用目标:</p>
+<p>@Target(ElementType.TYPE) //接口、类、枚举、注解</p>
+<p>@Target(ElementType.FIELD) //字段、枚举的常量</p>
+<p>@Target(ElementType.METHOD) //方法</p>
+<p>@Target(ElementType.PARAMETER) //方法参数</p>
+<p>@Target(ElementType.CONSTRUCTOR) //构造函数</p>
+<p>@Target(ElementType.LOCAL_VARIABLE)//局部变量</p>
+<p>@Target(ElementType.ANNOTATION_TYPE)//注解</p>
+<p>@Target(ElementType.PACKAGE) ///包</p>
+<p>由以上的源码可以知道，他的elementType 可以有多个，一个注解可以为类的，方法的，字段的等等</p>
+<p>@Document：说明该注解将被包含在javadoc中</p>
+<p>@Inherited：说明子类可以继承父类中的该注解</p>
+<p>比如@Valid注解定义是</p>
+<p><img src="https://pic1.zhimg.com/v2-36dccee41455cbf24aa5dc4ea98900e0_b.jpg" alt="img"></p>
+<p>表示该注解只能用在方法，属性，构造函数及方法参数上。该注意会被编译到class里可通过反射得到。</p>
+<h2 id="23-RequestMapping"><a href="#23-RequestMapping" class="headerlink" title="23.@RequestMapping"></a>23.@RequestMapping</h2><p>处理映射请求的注解。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。有6个属性。</p>
+<p>1、 value， method: value：指定请求的实际地址，指定的地址可以是URI Template 模式； method：指定请求的method类型， GET、POST、PUT、DELETE等； 比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value = &quot;/testValid&quot;, method = RequestMethod.POST)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">testValid</span><span class="params">(<span class="meta">@RequestBody</span> <span class="meta">@Valid</span> Test test,BindingResult result, HttpServletRequest request, HttpServletResponse response)</span> </span>&#123;</span><br><span class="line">    XXX</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>value的uri值为以下三类： A） 可以指定为普通的具体值；如@RequestMapping(value =”/testValid”) B) 可以指定为含有某变量的一类值;如@RequestMapping(value=”/{day}”) C) 可以指定为含正则表达式的一类值;如@RequestMapping(value=”/{textualPart:[a-z-]+}.{numericPart:[\d]+}”) 可以匹配../chenyuan122912请求。</p>
+<p>2、 consumes，produces： consumes： 指定处理请求的提交内容类型（Content-Type），例如@RequestMapping(value = “/test”, consumes=”application/json”)处理application/json内容类型</p>
+<p>produces: 指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回；</p>
+<p>3 params、headers： params： 指定request中必须包含某些参数值是，才让该方法处理。</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.GET, params=&quot;name=chenyuan&quot;)</span>  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findOrd</span><span class="params">(String name)</span> </span>&#123;      </span><br><span class="line">    <span class="comment">// implementation omitted  </span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>仅处理请求中包含了名为“name”，值为“chenyuan”的请求.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.GET, headers=&quot;Referer=www.baidu.com&quot;)</span>  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findOrd</span><span class="params">(String name)</span> </span>&#123;      </span><br><span class="line">    <span class="comment">// implementation omitted  </span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>headers： 指定request中必须包含某些指定的header值，才能让该方法处理请求。</p>
+<p>仅处理request的header中包含了指定“Refer”请求头和对应值为“<a target="_blank" rel="noopener" href="http://www.baidu.com”的请求/">www.baidu.com”的请求</a></p>
+<h2 id="24-GetMapping和-PostMapping"><a href="#24-GetMapping和-PostMapping" class="headerlink" title="24. @GetMapping和@PostMapping"></a>24. @GetMapping和@PostMapping</h2><p>@GetMapping(value = “page”)等价于@RequestMapping(value = “page”, method = RequestMethod.GET)</p>
+<p>@PostMapping(value = “page”)等价于@RequestMapping(value = “page”, method = RequestMethod.POST)</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/23/SpringDataJPA%E5%9C%A8SpringBoot%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2021-05-23T13:03:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/23/SpringDataJPA%E5%9C%A8SpringBoot%E4%BD%BF%E7%94%A8/">SpringDataJPA在SpringBoot使用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringData</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java, spring</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/11/22/java%E6%B3%A8%E8%A7%A3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/23/mybatis%E5%9C%A8springboot%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2021-05-23T11:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-23</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/11/21/quartz/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">quartz</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/23/mybatis%E5%9C%A8springboot%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/">mybatis在springboot使用和配置</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Configuration%E6%B3%A8%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">1.@Configuration注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Vaue%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">2.@Vaue注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Controller-Service-Repository-Component"><span class="toc-number">3.</span> <span class="toc-text">3.@Controller,@Service,@Repository,@Component</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-PostConstruct-%E5%92%8C-PreDestory"><span class="toc-number">4.</span> <span class="toc-text">4. @PostConstruct 和 @PreDestory</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Primary"><span class="toc-number">5.</span> <span class="toc-text">5. @Primary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Lazy-true"><span class="toc-number">6.</span> <span class="toc-text">6. @Lazy(true)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Autowired"><span class="toc-number">7.</span> <span class="toc-text">7. @Autowired</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Resource"><span class="toc-number">8.</span> <span class="toc-text">8. @Resource</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-Async"><span class="toc-number">9.</span> <span class="toc-text">9. @Async</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-Named"><span class="toc-number">10.</span> <span class="toc-text">10.@Named</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-Inject"><span class="toc-number">11.</span> <span class="toc-text">11. @Inject</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-Singleton"><span class="toc-number">12.</span> <span class="toc-text">12. @Singleton</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-Valid-Valided"><span class="toc-number">13.</span> <span class="toc-text">13.@Valid,@Valided</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-RequestBody"><span class="toc-number">14.</span> <span class="toc-text">14.@RequestBody</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-CrossOrigin"><span class="toc-number">15.</span> <span class="toc-text">15.@CrossOrigin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-RequestParam"><span class="toc-number">16.</span> <span class="toc-text">16.@RequestParam</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#17-PathVariable%EF%BC%8C-RequestHeader%EF%BC%8C-CookieValue%EF%BC%8C-RequestParam-RequestBody%EF%BC%8C-SessionAttributes-ModelAttribute"><span class="toc-number">16.1.</span> <span class="toc-text">17.@PathVariable，@RequestHeader，@CookieValue，@RequestParam, @RequestBody，@SessionAttributes, @ModelAttribute</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18-Scope"><span class="toc-number">17.</span> <span class="toc-text">18.@Scope</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#19-ResponseStatus"><span class="toc-number">18.</span> <span class="toc-text">19.@ResponseStatus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20-RestController"><span class="toc-number">19.</span> <span class="toc-text">20.@RestController</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#21-ControllerAdvice"><span class="toc-number">20.</span> <span class="toc-text">21.@ControllerAdvice</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22-%E5%85%83%E6%B3%A8%E8%A7%A3%E5%8C%85%E6%8B%AC-Retention-Target-Document-Inherited%E5%9B%9B%E7%A7%8D"><span class="toc-number">21.</span> <span class="toc-text">22.元注解包括 @Retention @Target @Document @Inherited四种</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#23-RequestMapping"><span class="toc-number">22.</span> <span class="toc-text">23.@RequestMapping</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#24-GetMapping%E5%92%8C-PostMapping"><span class="toc-number">23.</span> <span class="toc-text">24. @GetMapping和@PostMapping</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/23/DataGrip%E8%BF%9E%E6%8E%A5MySQL%E6%8A%A5%E6%97%B6%E5%8C%BA%E9%94%99%E8%AF%AF/" class="archive-article-date">
-  	<time datetime="2021-05-23T05:05:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-23</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/23/DataGrip%E8%BF%9E%E6%8E%A5MySQL%E6%8A%A5%E6%97%B6%E5%8C%BA%E9%94%99%E8%AF%AF/">DataGrip连接MySQL报时区错误</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/22/springboot%E9%85%8D%E7%BD%AEswagger2/" class="archive-article-date">
-  	<time datetime="2021-05-22T15:09:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/22/springboot%E9%85%8D%E7%BD%AEswagger2/">springboot配置swagger2</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/22/springboot%E8%B8%A9%E5%9D%91-resful%E6%8E%A5%E5%8F%97%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E4%B8%BAnull/" class="archive-article-date">
-  	<time datetime="2021-05-22T12:36:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/22/springboot%E8%B8%A9%E5%9D%91-resful%E6%8E%A5%E5%8F%97%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E4%B8%BAnull/">springboot踩坑-resful接受对象属性为null</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/20/%E5%87%A0%E6%95%B0%E4%B9%8B%E5%92%8C/" class="archive-article-date">
-  	<time datetime="2021-05-20T13:39:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/20/%E5%87%A0%E6%95%B0%E4%B9%8B%E5%92%8C/">几数之和题目总结</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-
 
           </div>
         </div>
@@ -418,8 +677,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
