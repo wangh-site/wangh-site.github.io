@@ -6,19 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>mybatis在springboot使用和配置 | Blog of Wangh</title>
+  <title>Tag: spring | Blog of Wangh</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring Data JPA，之前都是使用MyBatis，怎么使用具体记录一下吧 1、在SpringBoot项目的pom.xml文件中引入依赖12345678910&lt;dependency&gt;    &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;mysq">
-<meta property="og:type" content="article">
-<meta property="og:title" content="mybatis在springboot使用和配置">
-<meta property="og:url" content="http://example.com/2021/05/23/mybatis%E5%9C%A8springboot%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/index.html">
+  <meta name="description" content="Wangh的文档箱子">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog of Wangh">
+<meta property="og:url" content="http://example.com/tags/spring/index.html">
 <meta property="og:site_name" content="Blog of Wangh">
-<meta property="og:description" content="在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring Data JPA，之前都是使用MyBatis，怎么使用具体记录一下吧 1、在SpringBoot项目的pom.xml文件中引入依赖12345678910&lt;dependency&gt;    &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;mysq">
+<meta property="og:description" content="Wangh的文档箱子">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-05-23T11:47:05.000Z">
-<meta property="article:modified_time" content="2021-11-13T06:34:30.645Z">
 <meta property="article:author" content="Wangh">
-<meta property="article:tag" content="mybatis">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Blog of Wangh" type="application/atom+xml">
@@ -155,242 +152,61 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-mybatis在springboot使用和配置" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      mybatis在springboot使用和配置
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2021" class="archive-year">2021</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2021/11/24/spring%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+  	<time datetime="2021-11-24T14:32:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-24</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2021/11/24/spring%E9%85%8D%E7%BD%AE/">spring配置</a>
     </h1>
   
 
-        
-        <a href="/2021/05/23/mybatis%E5%9C%A8springboot%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2021-05-23T11:47:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-23</time>
-</a>
-        
-		
-		<!-- 《开始添加字数统计-->
-		
-		
-
-<div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        
-       <i class="icon-statistics"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">737字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-         
-        <i class="icon-book icon"></i>
-        <span class="post-meta-item-text"> 阅读时长≈</span>
-        <span class="post-count">4分</span>
-      </span>
-    </span>
-</div>
-
-
-		
-    
-    <!-- 添加字数统计完成》 -->
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring-Data-JPA，之前都是使用MyBatis，怎么使用具体记录一下吧"><a href="#在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring-Data-JPA，之前都是使用MyBatis，怎么使用具体记录一下吧" class="headerlink" title="在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring Data JPA，之前都是使用MyBatis，怎么使用具体记录一下吧"></a>在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring Data JPA，之前都是使用MyBatis，怎么使用具体记录一下吧</h4><hr>
-<h4 id="1、在SpringBoot项目的pom-xml文件中引入依赖"><a href="#1、在SpringBoot项目的pom-xml文件中引入依赖" class="headerlink" title="1、在SpringBoot项目的pom.xml文件中引入依赖"></a>1、在SpringBoot项目的pom.xml文件中引入依赖</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">    &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">2.0</span><span class="number">.0</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="2、在配置文件中配置mysql的连接配置"><a href="#2、在配置文件中配置mysql的连接配置" class="headerlink" title="2、在配置文件中配置mysql的连接配置"></a>2、在配置文件中配置mysql的连接配置</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mysql--&gt;</span></span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    url: jdbc:mysql://localhost:3306/wangh?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=true</span><br><span class="line">    username: root</span><br><span class="line">    password: root</span><br><span class="line">    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- postgresql--&gt;</span></span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    url: jdbc:postgresql://192.168.31.106:5432/postgres</span><br><span class="line">    driver-class-name: org.postgresql.Driver</span><br><span class="line">    username: postgres</span><br><span class="line">    password: 123</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="3、建立需要的实体类和表，然后在Dao层中添加操作接口来定义数据操作"><a href="#3、建立需要的实体类和表，然后在Dao层中添加操作接口来定义数据操作" class="headerlink" title="3、建立需要的实体类和表，然后在Dao层中添加操作接口来定义数据操作"></a>3、建立需要的实体类和表，然后在Dao层中添加操作接口来定义数据操作</h4><p>随便写一个查询的语句，在每个接口的前面加上**@Mapper**注解，让项目能够扫描到</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface UserMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Select(&quot;SELECT * FROM user WHERE name = #&#123;name&#125;&quot;)</span><br><span class="line">    User findByName(@Param(&quot;name&quot;) String name);</span><br><span class="line"></span><br><span class="line">    @Insert(&quot;INSERT INTO user(name, age) VALUES(#&#123;name&#125;, #&#123;age&#125;)&quot;)</span><br><span class="line">    int insert(@Param(&quot;name&quot;) String name, @Param(&quot;age&quot;) Integer age);</span><br><span class="line"></span><br><span class="line">    @Update(&quot;UPDATE user SET age=#&#123;age&#125; WHERE name=#&#123;name&#125;&quot;)</span><br><span class="line">    void update(User user);</span><br><span class="line"></span><br><span class="line">    @Delete(&quot;DELETE FROM user WHERE id =#&#123;id&#125;&quot;)</span><br><span class="line">    void delete(Long id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果要使用包装类（实体类和表不一样），这个时候最好使用@Results和@Result注解来绑定</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">    @Result(property = &quot;name&quot;, column = &quot;name&quot;),</span></span><br><span class="line"><span class="meta">    @Result(property = &quot;age&quot;, column = &quot;age&quot;)</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br><span class="line"><span class="meta">@Select(&quot;SELECT name, age FROM user&quot;)</span></span><br><span class="line"><span class="function">List&lt;User&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>其实除了使用@Mapper来让扫描还可以使用@MapperSan来指定路径，但是有的时候扫描不到，我还是习惯在每个接口前加上@Mapper注解，看着比较舒服</p>
-<h4 id="3、xml配置文件实现"><a href="#3、xml配置文件实现" class="headerlink" title="3、xml配置文件实现"></a>3、xml配置文件实现</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">    <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">    <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;org.apache.ibatis.submitted.rounding.Mapper&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">&quot;org.apache.ibatis.submitted.rounding.User&quot;</span> <span class="attr">id</span>=<span class="string">&quot;usermap&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;name&quot;</span> <span class="attr">property</span>=<span class="string">&quot;name&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;funkyNumber&quot;</span> <span class="attr">property</span>=<span class="string">&quot;funkyNumber&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;roundingMode&quot;</span> <span class="attr">property</span>=<span class="string">&quot;roundingMode&quot;</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getUser&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;usermap&quot;</span>&gt;</span></span><br><span class="line">		select * from users</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insert&quot;</span>&gt;</span></span><br><span class="line">	    insert into users (id, name, funkyNumber, roundingMode) values (</span><br><span class="line">	    	#&#123;id&#125;, #&#123;name&#125;, #&#123;funkyNumber&#125;, #&#123;roundingMode&#125;</span><br><span class="line">	    )</span><br><span class="line">	<span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">&quot;org.apache.ibatis.submitted.rounding.User&quot;</span> <span class="attr">id</span>=<span class="string">&quot;usermap2&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;name&quot;</span> <span class="attr">property</span>=<span class="string">&quot;name&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;funkyNumber&quot;</span> <span class="attr">property</span>=<span class="string">&quot;funkyNumber&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;roundingMode&quot;</span> <span class="attr">property</span>=<span class="string">&quot;roundingMode&quot;</span> <span class="attr">typeHandler</span>=<span class="string">&quot;org.apache.ibatis.type.EnumTypeHandler&quot;</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getUser2&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;usermap2&quot;</span>&gt;</span></span><br><span class="line">		select * from users2</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insert2&quot;</span>&gt;</span></span><br><span class="line">	    insert into users2 (id, name, funkyNumber, roundingMode) values (</span><br><span class="line">	    	#&#123;id&#125;, #&#123;name&#125;, #&#123;funkyNumber&#125;, #&#123;roundingMode, typeHandler=org.apache.ibatis.type.EnumTypeHandler&#125;</span><br><span class="line">	    )</span><br><span class="line">	<span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/weixin.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/05/23/mybatis%E5%9C%A8springboot%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2021/05/23/SpringDataJPA%E5%9C%A8SpringBoot%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          SpringDataJPA在SpringBoot使用
-        
-      </div>
-    </a>
   
   
-    <a href="/2021/05/23/DataGrip%E8%BF%9E%E6%8E%A5MySQL%E6%8A%A5%E6%97%B6%E5%8C%BA%E9%94%99%E8%AF%AF/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">DataGrip连接MySQL报时区错误</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8SpringBoot%E8%AE%BF%E9%97%AE%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%96%B9%E5%BC%8F%E6%9C%89%E4%B8%A4%E7%A7%8D%EF%BC%9AMyBatis%E5%92%8CSpring-Data-JPA%EF%BC%8C%E4%B9%8B%E5%89%8D%E9%83%BD%E6%98%AF%E4%BD%BF%E7%94%A8MyBatis%EF%BC%8C%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E5%85%B7%E4%BD%93%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%E5%90%A7"><span class="toc-number">1.</span> <span class="toc-text">在SpringBoot访问关系型数据库方式有两种：MyBatis和Spring Data JPA，之前都是使用MyBatis，怎么使用具体记录一下吧</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%9C%A8SpringBoot%E9%A1%B9%E7%9B%AE%E7%9A%84pom-xml%E6%96%87%E4%BB%B6%E4%B8%AD%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="toc-number">2.</span> <span class="toc-text">1、在SpringBoot项目的pom.xml文件中引入依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%9C%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD%E9%85%8D%E7%BD%AEmysql%E7%9A%84%E8%BF%9E%E6%8E%A5%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">2、在配置文件中配置mysql的连接配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%BB%BA%E7%AB%8B%E9%9C%80%E8%A6%81%E7%9A%84%E5%AE%9E%E4%BD%93%E7%B1%BB%E5%92%8C%E8%A1%A8%EF%BC%8C%E7%84%B6%E5%90%8E%E5%9C%A8Dao%E5%B1%82%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%93%8D%E4%BD%9C%E6%8E%A5%E5%8F%A3%E6%9D%A5%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="toc-number">4.</span> <span class="toc-text">3、建立需要的实体类和表，然后在Dao层中添加操作接口来定义数据操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%AE%9E%E7%8E%B0"><span class="toc-number">5.</span> <span class="toc-text">3、xml配置文件实现</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
+    
 
-  
-
-  
 
           </div>
         </div>
@@ -412,9 +228,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
