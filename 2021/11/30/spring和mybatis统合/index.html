@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>spring实现资源过滤 | Blog of Wangh</title>
+  <title>spring和mybatis统合 | Blog of Wangh</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Maven约定大于配置，一般只会读取recourse下面的xml文件，想读取其他位置的配置文件，需要配置资源过滤1234567891011121314151617181920&lt;build&gt;    &lt;resources&gt;        &lt;resource&gt;            &lt;directory&gt;src&#x2F;main&#x2F;java&lt;&#x2F;director">
+  <meta name="description" content="Spring和Mybatis统合配置mybatis-config.xml一般只需要配置别名 123456789&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot; ?&gt;&lt;!DOCTYPE configuration        PUBLIC &quot;-&#x2F;&#x2F;mybatis.org&#x2F;&#x2F;DTD Config 3.0&#x2F;&#x2F;E">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spring实现资源过滤">
-<meta property="og:url" content="http://example.com/2021/11/28/spring%E5%AE%9E%E7%8E%B0%E8%B5%84%E6%BA%90%E8%BF%87%E6%BB%A4/index.html">
+<meta property="og:title" content="spring和mybatis统合">
+<meta property="og:url" content="http://example.com/2021/11/30/spring%E5%92%8Cmybatis%E7%BB%9F%E5%90%88/index.html">
 <meta property="og:site_name" content="Blog of Wangh">
-<meta property="og:description" content="Maven约定大于配置，一般只会读取recourse下面的xml文件，想读取其他位置的配置文件，需要配置资源过滤1234567891011121314151617181920&lt;build&gt;    &lt;resources&gt;        &lt;resource&gt;            &lt;directory&gt;src&#x2F;main&#x2F;java&lt;&#x2F;director">
+<meta property="og:description" content="Spring和Mybatis统合配置mybatis-config.xml一般只需要配置别名 123456789&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot; ?&gt;&lt;!DOCTYPE configuration        PUBLIC &quot;-&#x2F;&#x2F;mybatis.org&#x2F;&#x2F;DTD Config 3.0&#x2F;&#x2F;E">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-11-28T03:35:12.000Z">
-<meta property="article:modified_time" content="2021-11-28T03:37:10.084Z">
+<meta property="article:published_time" content="2021-11-30T12:46:38.000Z">
+<meta property="article:modified_time" content="2021-11-30T12:57:27.627Z">
 <meta property="article:author" content="Wangh">
-<meta property="article:tag" content="spring">
+<meta property="article:tag" content="spring, mybatis">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Blog of Wangh" type="application/atom+xml">
@@ -155,20 +155,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-spring实现资源过滤" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-spring和mybatis统合" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      spring实现资源过滤
+      spring和mybatis统合
     </h1>
   
 
         
-        <a href="/2021/11/28/spring%E5%AE%9E%E7%8E%B0%E8%B5%84%E6%BA%90%E8%BF%87%E6%BB%A4/" class="archive-article-date">
-  	<time datetime="2021-11-28T03:35:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-28</time>
+        <a href="/2021/11/30/spring%E5%92%8Cmybatis%E7%BB%9F%E5%90%88/" class="archive-article-date">
+  	<time datetime="2021-11-30T12:46:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-30</time>
 </a>
         
 		
@@ -182,7 +182,7 @@
         
        <i class="icon-statistics"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">136字</span>
+        <span class="post-count">385字</span>
       </span>
     </span>
 
@@ -192,7 +192,7 @@
          
         <i class="icon-book icon"></i>
         <span class="post-meta-item-text"> 阅读时长≈</span>
-        <span class="post-count">1分</span>
+        <span class="post-count">2分</span>
       </span>
     </span>
 </div>
@@ -205,8 +205,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Maven约定大于配置，一般只会读取recourse下面的xml文件，想读取其他位置的配置文件，需要配置资源过滤"><a href="#Maven约定大于配置，一般只会读取recourse下面的xml文件，想读取其他位置的配置文件，需要配置资源过滤" class="headerlink" title="Maven约定大于配置，一般只会读取recourse下面的xml文件，想读取其他位置的配置文件，需要配置资源过滤"></a>Maven约定大于配置，一般只会读取recourse下面的xml文件，想读取其他位置的配置文件，需要配置资源过滤</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/java<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.properties<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.xml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>true<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/resources<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.properties<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.xml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>true<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <h2 id="Spring和Mybatis统合"><a href="#Spring和Mybatis统合" class="headerlink" title="Spring和Mybatis统合"></a>Spring和Mybatis统合</h2><h3 id="配置mybatis-config-xml"><a href="#配置mybatis-config-xml" class="headerlink" title="配置mybatis-config.xml"></a>配置mybatis-config.xml</h3><p><strong>一般只需要配置别名</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">configuration</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;com.wangh.spring_mybatis.pojo&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+
+
+<h3 id="配置spring-dao-xml"><a href="#配置spring-dao-xml" class="headerlink" title="配置spring-dao.xml"></a>配置spring-dao.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">        https://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">        http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="string"><span class="tag">        https://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;com.wangh.spring_mybatis&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driverClassName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;org.postgresql.Driver&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:postgresql://127.0.0.1:5432/mybatis?useSSL=true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;postgres&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;fnst1234&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;dataSource&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;configLocation&quot;</span> <span class="attr">value</span>=<span class="string">&quot;classpath:mybatis-config.xml&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;mapperLocations&quot;</span> <span class="attr">value</span>=<span class="string">&quot;classpath:dao/*.xml&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;basePackage&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.wangh.spring_mybatis.dao&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>需要配置一个数据源</li>
+<li>一个sqlSessionFactory（导入mybtais配置文件以及指定映射器xml的位置让映射器可以找到）</li>
+<li>MapperScannerConfigurer实现映射器自动注入</li>
+</ol>
 
       
 
@@ -246,7 +256,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">spring, mybatis</a>
         		</li>
       		
 		</ul>
@@ -302,7 +312,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/11/28/spring%E5%AE%9E%E7%8E%B0%E8%B5%84%E6%BA%90%E8%BF%87%E6%BB%A4/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/11/30/spring%E5%92%8Cmybatis%E7%BB%9F%E5%90%88/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -316,18 +326,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/11/30/spring%E5%92%8Cmybatis%E7%BB%9F%E5%90%88/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          spring和mybatis统合
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/11/28/mybtais%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">mybtais配置</div>
+    <a href="/2021/11/28/spring%E5%AE%9E%E7%8E%B0%E8%B5%84%E6%BA%90%E8%BF%87%E6%BB%A4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">spring实现资源过滤</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -354,7 +355,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Maven%E7%BA%A6%E5%AE%9A%E5%A4%A7%E4%BA%8E%E9%85%8D%E7%BD%AE%EF%BC%8C%E4%B8%80%E8%88%AC%E5%8F%AA%E4%BC%9A%E8%AF%BB%E5%8F%96recourse%E4%B8%8B%E9%9D%A2%E7%9A%84xml%E6%96%87%E4%BB%B6%EF%BC%8C%E6%83%B3%E8%AF%BB%E5%8F%96%E5%85%B6%E4%BB%96%E4%BD%8D%E7%BD%AE%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%8C%E9%9C%80%E8%A6%81%E9%85%8D%E7%BD%AE%E8%B5%84%E6%BA%90%E8%BF%87%E6%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">Maven约定大于配置，一般只会读取recourse下面的xml文件，想读取其他位置的配置文件，需要配置资源过滤</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring%E5%92%8CMybatis%E7%BB%9F%E5%90%88"><span class="toc-number">1.</span> <span class="toc-text">Spring和Mybatis统合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEmybatis-config-xml"><span class="toc-number">1.1.</span> <span class="toc-text">配置mybatis-config.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEspring-dao-xml"><span class="toc-number">1.2.</span> <span class="toc-text">配置spring-dao.xml</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
