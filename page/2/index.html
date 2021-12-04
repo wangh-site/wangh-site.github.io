@@ -154,6 +154,120 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-数据库添加ip白名单" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/16/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B7%BB%E5%8A%A0ip%E7%99%BD%E5%90%8D%E5%8D%95/">数据库添加ip白名单</a>
+    </h1>
+  
+
+        
+        <a href="/2021/09/16/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B7%BB%E5%8A%A0ip%E7%99%BD%E5%90%8D%E5%8D%95/" class="archive-article-date">
+  	<time datetime="2021-09-16T13:42:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-16</time>
+</a>
+        
+		
+		<!-- 《开始添加字数统计-->
+		
+		
+
+<div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        
+       <i class="icon-statistics"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">91字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+         
+        <i class="icon-book icon"></i>
+        <span class="post-meta-item-text"> 阅读时长≈</span>
+        <span class="post-count">1分</span>
+      </span>
+    </span>
+</div>
+
+
+		
+    
+    <!-- 添加字数统计完成》 -->
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h3 id="MySQL添加ip白名单"><a href="#MySQL添加ip白名单" class="headerlink" title="MySQL添加ip白名单"></a>MySQL添加ip白名单</h3><p>bin文件夹运行命令：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p root</span><br></pre></td></tr></table></figure>
+
+<p>进入mysql后，输入命令</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on *.* to &#x27;用户名&#x27;@&#x27;IP地址&#x27; identified by &#x27;密码&#x27;;</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 刷新权限 --&gt;</span></span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+<p>重启mysql服务即可</p>
+<hr>
+<h3 id="PostgreSQL添加ip白名单"><a href="#PostgreSQL添加ip白名单" class="headerlink" title="PostgreSQL添加ip白名单"></a>PostgreSQL添加ip白名单</h3><p>打开data文件下的pg_hba.conf文件</p>
+<p>在IPv4 local connections:添加ip</p>
+<p>重启postgresql服务即可</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">mysql、postgresql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/16/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B7%BB%E5%8A%A0ip%E7%99%BD%E5%90%8D%E5%8D%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-数据库安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1149,6 +1263,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">spring, mybatis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">log4j</a>
               </li>
             
             <div class="clearfix"></div>
